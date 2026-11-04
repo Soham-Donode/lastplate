@@ -1,0 +1,592 @@
+import type {
+  CollectionRecord,
+  CollectionRequest,
+  Donation,
+  Profile,
+} from "@/types";
+import { isoHoursFromNow } from "@/lib/utils";
+
+export type DemoRequestRow = Omit<CollectionRequest, "donation" | "ngo">;
+export type DemoRecordRow = Omit<
+  CollectionRecord,
+  "donation" | "ngo" | "quantityUnit"
+>;
+
+export interface DemoDatabase {
+  seededAt: string;
+  profiles: Profile[];
+  donations: Donation[];
+  collectionRequests: DemoRequestRow[];
+  collectionRecords: DemoRecordRow[];
+}
+
+export const DEMO_DONOR_ID = "11111111-1111-4111-8111-111111111111";
+export const DEMO_NGO_ID = "22222222-2222-4222-8222-222222222222";
+export const DEMO_ADMIN_ID = "99999999-9999-4999-8999-999999999999";
+
+const DONOR_ID = DEMO_DONOR_ID;
+const ANNAPURNA_ID = DEMO_NGO_ID;
+const FEEDING_HANDS_ID = "33333333-3333-4333-8333-333333333333";
+const ROTI_BANK_ID = "44444444-4444-4444-8444-444444444444";
+const SEVA_ID = "55555555-5555-4555-8555-555555555555";
+
+const HOUR = 60 * 60 * 1000;
+
+const DEMO_DONATION_LOCATIONS: Record<string, [number, number]> = {
+  "a1000000-0000-4000-8000-000000000001": [12.9723, 77.6418],
+  "a1000000-0000-4000-8000-000000000002": [12.9715, 77.6405],
+  "a1000000-0000-4000-8000-000000000003": [12.972, 77.6425],
+  "a1000000-0000-4000-8000-000000000004": [12.9717, 77.641],
+  "a1000000-0000-4000-8000-000000000005": [12.9719, 77.6413],
+  "a1000000-0000-4000-8000-000000000006": [12.9731, 77.6402],
+  "a1000000-0000-4000-8000-000000000007": [12.9712, 77.6421],
+  "a1000000-0000-4000-8000-000000000008": [12.9726, 77.6398],
+  "a1000000-0000-4000-8000-000000000009": [12.9709, 77.6416],
+  "a1000000-0000-4000-8000-000000000010": [12.9735, 77.6419],
+  "a1000000-0000-4000-8000-000000000011": [12.9718, 77.6409],
+};
+
+function hoursAgo(hours: number, now: Date) {
+  return new Date(now.getTime() - hours * HOUR).toISOString();
+}
+
+function profile(
+  id: string,
+  overrides: Partial<Profile> &
+    Pick<
+      Profile,
+      "fullName" | "email" | "role" | "organizationName" | "organizationType"
+    >,
+): Profile {
+  return {
+    id,
+    phone: "+91 80 4123 8890",
+    city: "Bengaluru",
+    address: "Indiranagar, Bengaluru",
+    latitude: 12.9716,
+    longitude: 77.5946,
+    verificationStatus: "verified",
+    registrationNumber: null,
+    verificationNotes: null,
+    isActive: true,
+    createdAt: hoursAgo(24 * 120, new Date()),
+    updatedAt: hoursAgo(24 * 2, new Date()),
+    ...overrides,
+  };
+}
+
+/**
+ * Demo workspace data. Every value here is clearly labelled as demo data in the
+ * UI; production builds read from Supabase instead. Timestamps are relative to
+ * the moment the workspace is first created so the dashboard always shows
+ * realistic deadlines.
+ */
+export function createDemoDatabase(now = new Date()): DemoDatabase {
+  const base = {
+    createdAt: hoursAgo(2, now),
+    updatedAt: hoursAgo(2, now),
+  };
+
+  const donations: Donation[] = ([
+    {
+      id: "a1000000-0000-4000-8000-000000000001",
+      donorId: DONOR_ID,
+      title: "Vegetable pulao with raita",
+      description:
+        "Freshly prepared vegetable pulao cooked in small batches for the lunch service, with chilled cucumber raita on the side.",
+      category: "cooked_meals",
+      quantity: 12,
+      quantityUnit: "kg",
+      foodType: "vegetarian",
+      allergens: "Milk (raita), mustard seeds",
+      imageUrl: null,
+      preparedAt: hoursAgo(2, now),
+      safeUntil: isoHoursFromNow(5, now),
+      pickupDeadline: isoHoursFromNow(3.5, now),
+      pickupAddress: "Saffron Kitchen, 14, 5th Cross, Indiranagar, Bengaluru",
+      city: "Bengaluru",
+      additionalInstructions:
+        "Please bring insulated containers. Ask for the kitchen manager at the service entrance.",
+      status: "available",
+      assignedNgoId: null,
+      createdAt: base.createdAt,
+      updatedAt: base.updatedAt,
+    },
+    {
+      id: "a1000000-0000-4000-8000-000000000002",
+      donorId: DONOR_ID,
+      title: "Assorted breads and buns",
+      description:
+        "Bakery surplus from this morning — whole wheat loaves, pav buns and a few croissants, all baked today.",
+      category: "bread_bakery",
+      quantity: 6,
+      quantityUnit: "kg",
+      foodType: "vegetarian",
+      allergens: "Wheat, gluten, milk",
+      imageUrl: null,
+      preparedAt: hoursAgo(6, now),
+      safeUntil: isoHoursFromNow(20, now),
+      pickupDeadline: isoHoursFromNow(7, now),
+      pickupAddress: "Saffron Kitchen, 14, 5th Cross, Indiranagar, Bengaluru",
+      city: "Bengaluru",
+      additionalInstructions: null,
+      status: "available",
+      assignedNgoId: null,
+      createdAt: hoursAgo(48, now),
+      updatedAt: hoursAgo(48, now),
+    },
+    {
+      id: "a1000000-0000-4000-8000-000000000003",
+      donorId: DONOR_ID,
+      title: "Rajma chawal",
+      description:
+        "Slow-cooked kidney beans in a tomato and onion gravy with steamed basmati rice. Packed in food-grade trays.",
+      category: "cooked_meals",
+      quantity: 18,
+      quantityUnit: "kg",
+      foodType: "vegetarian",
+      allergens: "None known",
+      imageUrl: null,
+      preparedAt: hoursAgo(1, now),
+      safeUntil: isoHoursFromNow(4, now),
+      pickupDeadline: isoHoursFromNow(2, now),
+      pickupAddress: "Saffron Kitchen, 14, 5th Cross, Indiranagar, Bengaluru",
+      city: "Bengaluru",
+      additionalInstructions: "Call the kitchen line on arrival.",
+      status: "assigned",
+      assignedNgoId: ANNAPURNA_ID,
+      createdAt: hoursAgo(5, now),
+      updatedAt: hoursAgo(1, now),
+    },
+    {
+      id: "a1000000-0000-4000-8000-000000000004",
+      donorId: DONOR_ID,
+      title: "Fresh fruit crates",
+      description:
+        "Bananas, apples and seasonal oranges from the breakfast counter. Washed and sorted.",
+      category: "fruits",
+      quantity: 9,
+      quantityUnit: "kg",
+      foodType: "vegetarian",
+      allergens: null,
+      imageUrl: null,
+      preparedAt: hoursAgo(4, now),
+      safeUntil: isoHoursFromNow(30, now),
+      pickupDeadline: isoHoursFromNow(9, now),
+      pickupAddress: "Saffron Kitchen, 14, 5th Cross, Indiranagar, Bengaluru",
+      city: "Bengaluru",
+      additionalInstructions: null,
+      status: "available",
+      assignedNgoId: null,
+      createdAt: hoursAgo(30, now),
+      updatedAt: hoursAgo(30, now),
+    },
+    {
+      id: "a1000000-0000-4000-8000-000000000005",
+      donorId: DONOR_ID,
+      title: "Paneer butter masala with rotis",
+      description:
+        "Paneer curry with fresh tandoori rotis, packed and refrigerated after the dinner service.",
+      category: "cooked_meals",
+      quantity: 15,
+      quantityUnit: "kg",
+      foodType: "vegetarian",
+      allergens: "Milk, wheat",
+      imageUrl: null,
+      preparedAt: hoursAgo(26, now),
+      safeUntil: hoursAgo(20, now),
+      pickupDeadline: hoursAgo(22, now),
+      pickupAddress: "Saffron Kitchen, 14, 5th Cross, Indiranagar, Bengaluru",
+      city: "Bengaluru",
+      additionalInstructions: null,
+      status: "collected",
+      assignedNgoId: FEEDING_HANDS_ID,
+      createdAt: hoursAgo(28, now),
+      updatedAt: hoursAgo(20, now),
+    },
+    {
+      id: "a1000000-0000-4000-8000-000000000006",
+      donorId: DONOR_ID,
+      title: "Chicken biryani",
+      description:
+        "Dum-cooked chicken biryani from the evening buffet. Contains bone-in chicken pieces.",
+      category: "cooked_meals",
+      quantity: 10,
+      quantityUnit: "kg",
+      foodType: "non_vegetarian",
+      allergens: "Milk (yoghurt marinade)",
+      imageUrl: null,
+      preparedAt: hoursAgo(30, now),
+      safeUntil: hoursAgo(26, now),
+      pickupDeadline: hoursAgo(28, now),
+      pickupAddress: "Saffron Kitchen, 14, 5th Cross, Indiranagar, Bengaluru",
+      city: "Bengaluru",
+      additionalInstructions: null,
+      status: "expired",
+      assignedNgoId: null,
+      createdAt: hoursAgo(96, now),
+      updatedAt: hoursAgo(26, now),
+    },
+    {
+      id: "a1000000-0000-4000-8000-000000000007",
+      donorId: DONOR_ID,
+      title: "Packaged snack boxes",
+      description:
+        "Sealed packets of biscuits, namkeen and juice cartons from a cancelled corporate order.",
+      category: "packaged_food",
+      quantity: 4,
+      quantityUnit: "kg",
+      foodType: "vegetarian",
+      allergens: "Wheat, soy",
+      imageUrl: null,
+      preparedAt: hoursAgo(74, now),
+      safeUntil: hoursAgo(66, now),
+      pickupDeadline: hoursAgo(68, now),
+      pickupAddress: "Saffron Kitchen, 14, 5th Cross, Indiranagar, Bengaluru",
+      city: "Bengaluru",
+      additionalInstructions: "Sealed and shelf-stable.",
+      status: "collected",
+      assignedNgoId: ANNAPURNA_ID,
+      createdAt: hoursAgo(74, now),
+      updatedAt: hoursAgo(68, now),
+    },
+    {
+      id: "a1000000-0000-4000-8000-000000000008",
+      donorId: DONOR_ID,
+      title: "Seasonal vegetable crates",
+      description:
+        "Tomatoes, capsicum, beans and carrots from the morning delivery. Some cosmetic blemishes, fully usable.",
+      category: "vegetables",
+      quantity: 7,
+      quantityUnit: "kg",
+      foodType: "vegetarian",
+      allergens: null,
+      imageUrl: null,
+      preparedAt: hoursAgo(3, now),
+      safeUntil: isoHoursFromNow(12, now),
+      pickupDeadline: isoHoursFromNow(6, now),
+      pickupAddress: "Saffron Kitchen, 14, 5th Cross, Indiranagar, Bengaluru",
+      city: "Bengaluru",
+      additionalInstructions: null,
+      status: "available",
+      assignedNgoId: null,
+      createdAt: hoursAgo(26, now),
+      updatedAt: hoursAgo(26, now),
+    },
+    {
+      id: "a1000000-0000-4000-8000-000000000009",
+      donorId: DONOR_ID,
+      title: "Lemon rice and papad",
+      description:
+        "South Indian lemon rice with roasted papad, prepared for the afternoon tiffin service.",
+      category: "rice_grains",
+      quantity: 14,
+      quantityUnit: "kg",
+      foodType: "vegetarian",
+      allergens: "Mustard, peanuts",
+      imageUrl: null,
+      preparedAt: hoursAgo(5, now),
+      safeUntil: isoHoursFromNow(3, now),
+      pickupDeadline: isoHoursFromNow(2.5, now),
+      pickupAddress: "Saffron Kitchen, 14, 5th Cross, Indiranagar, Bengaluru",
+      city: "Bengaluru",
+      additionalInstructions: null,
+      status: "available",
+      assignedNgoId: null,
+      createdAt: hoursAgo(7, now),
+      updatedAt: hoursAgo(7, now),
+    },
+    {
+      id: "a1000000-0000-4000-8000-000000000010",
+      donorId: DONOR_ID,
+      title: "Grilled vegetable sandwiches",
+      description:
+        "Whole wheat sandwiches with grilled vegetables and mint chutney, prepared for a private event.",
+      category: "bread_bakery",
+      quantity: 5,
+      quantityUnit: "kg",
+      foodType: "vegetarian",
+      allergens: "Wheat, milk",
+      imageUrl: null,
+      preparedAt: hoursAgo(20, now),
+      safeUntil: hoursAgo(12, now),
+      pickupDeadline: hoursAgo(14, now),
+      pickupAddress: "Saffron Kitchen, 14, 5th Cross, Indiranagar, Bengaluru",
+      city: "Bengaluru",
+      additionalInstructions: null,
+      status: "expired",
+      assignedNgoId: null,
+      createdAt: hoursAgo(120, now),
+      updatedAt: hoursAgo(12, now),
+    },
+    {
+      id: "a1000000-0000-4000-8000-000000000011",
+      donorId: DONOR_ID,
+      title: "Curd rice with pickle",
+      description:
+        "Tempered curd rice packed in individual containers for a community lunch.",
+      category: "rice_grains",
+      quantity: 8,
+      quantityUnit: "kg",
+      foodType: "vegetarian",
+      allergens: "Milk, mustard",
+      imageUrl: null,
+      preparedAt: hoursAgo(48, now),
+      safeUntil: hoursAgo(42, now),
+      pickupDeadline: hoursAgo(44, now),
+      pickupAddress: "Saffron Kitchen, 14, 5th Cross, Indiranagar, Bengaluru",
+      city: "Bengaluru",
+      additionalInstructions: null,
+      status: "collected",
+      assignedNgoId: FEEDING_HANDS_ID,
+      createdAt: hoursAgo(144, now),
+      updatedAt: hoursAgo(42, now),
+    },
+  ] satisfies Omit<Donation, "latitude" | "longitude">[]).map(
+    (donation): Donation => ({
+      ...donation,
+      latitude: DEMO_DONATION_LOCATIONS[donation.id]?.[0] ?? null,
+      longitude: DEMO_DONATION_LOCATIONS[donation.id]?.[1] ?? null,
+    }),
+  );
+
+  const collectionRequests: DemoRequestRow[] = [
+    {
+      id: "b1000000-0000-4000-8000-000000000001",
+      donationId: donations[0]!.id,
+      ngoId: ANNAPURNA_ID,
+      requestedQuantity: 12,
+      message:
+        "We can collect by 6 pm and serve around 80 people at our Indiranagar community kitchen.",
+      status: "pending",
+      createdAt: hoursAgo(0.7, now),
+      updatedAt: hoursAgo(0.7, now),
+    },
+    {
+      id: "b1000000-0000-4000-8000-000000000002",
+      donationId: donations[0]!.id,
+      ngoId: FEEDING_HANDS_ID,
+      requestedQuantity: 8,
+      message: "Our van is nearby and can be there within 30 minutes.",
+      status: "pending",
+      createdAt: hoursAgo(0.4, now),
+      updatedAt: hoursAgo(0.4, now),
+    },
+    {
+      id: "b1000000-0000-4000-8000-000000000003",
+      donationId: donations[0]!.id,
+      ngoId: ROTI_BANK_ID,
+      requestedQuantity: 12,
+      message: null,
+      status: "pending",
+      createdAt: hoursAgo(0.2, now),
+      updatedAt: hoursAgo(0.2, now),
+    },
+    {
+      id: "b1000000-0000-4000-8000-000000000004",
+      donationId: donations[1]!.id,
+      ngoId: FEEDING_HANDS_ID,
+      requestedQuantity: 6,
+      message: "We will distribute these at the Halasuru night shelter.",
+      status: "pending",
+      createdAt: hoursAgo(3, now),
+      updatedAt: hoursAgo(3, now),
+    },
+    {
+      id: "b1000000-0000-4000-8000-000000000005",
+      donationId: donations[1]!.id,
+      ngoId: SEVA_ID,
+      requestedQuantity: 4,
+      message: null,
+      status: "pending",
+      createdAt: hoursAgo(2, now),
+      updatedAt: hoursAgo(2, now),
+    },
+    {
+      id: "b1000000-0000-4000-8000-000000000006",
+      donationId: donations[2]!.id,
+      ngoId: ANNAPURNA_ID,
+      requestedQuantity: 18,
+      message: "Confirmed with our kitchen team — we can take the full quantity.",
+      status: "accepted",
+      createdAt: hoursAgo(2, now),
+      updatedAt: hoursAgo(1, now),
+    },
+    {
+      id: "b1000000-0000-4000-8000-000000000007",
+      donationId: donations[2]!.id,
+      ngoId: ROTI_BANK_ID,
+      requestedQuantity: 10,
+      message: null,
+      status: "rejected",
+      createdAt: hoursAgo(2.5, now),
+      updatedAt: hoursAgo(1, now),
+    },
+    {
+      id: "b1000000-0000-4000-8000-000000000008",
+      donationId: donations[4]!.id,
+      ngoId: FEEDING_HANDS_ID,
+      requestedQuantity: 15,
+      message: "Thank you — the meal was distributed at our Whitefield centre.",
+      status: "completed",
+      createdAt: hoursAgo(27, now),
+      updatedAt: hoursAgo(20, now),
+    },
+    {
+      id: "b1000000-0000-4000-8000-000000000009",
+      donationId: donations[6]!.id,
+      ngoId: ANNAPURNA_ID,
+      requestedQuantity: 4,
+      message: null,
+      status: "completed",
+      createdAt: hoursAgo(73, now),
+      updatedAt: hoursAgo(68, now),
+    },
+    {
+      id: "b1000000-0000-4000-8000-000000000010",
+      donationId: donations[8]!.id,
+      ngoId: ROTI_BANK_ID,
+      requestedQuantity: 14,
+      message: "We can arrange pickup before 4 pm today.",
+      status: "pending",
+      createdAt: hoursAgo(2, now),
+      updatedAt: hoursAgo(2, now),
+    },
+    {
+      id: "b1000000-0000-4000-8000-000000000011",
+      donationId: donations[5]!.id,
+      ngoId: SEVA_ID,
+      requestedQuantity: 10,
+      message: null,
+      status: "cancelled",
+      createdAt: hoursAgo(30, now),
+      updatedAt: hoursAgo(28, now),
+    },
+    {
+      id: "b1000000-0000-4000-8000-000000000012",
+      donationId: donations[10]!.id,
+      ngoId: FEEDING_HANDS_ID,
+      requestedQuantity: 8,
+      message: null,
+      status: "completed",
+      createdAt: hoursAgo(48, now),
+      updatedAt: hoursAgo(42, now),
+    },
+  ];
+
+  const collectionRecords: DemoRecordRow[] = [
+    {
+      id: "c1000000-0000-4000-8000-000000000001",
+      donationId: donations[4]!.id,
+      ngoId: FEEDING_HANDS_ID,
+      donorId: DONOR_ID,
+      collectedQuantity: 15,
+      collectedAt: hoursAgo(20, now),
+      notes: "Collected in insulated containers by the Feeding Hands team.",
+    },
+    {
+      id: "c1000000-0000-4000-8000-000000000002",
+      donationId: donations[6]!.id,
+      ngoId: ANNAPURNA_ID,
+      donorId: DONOR_ID,
+      collectedQuantity: 4,
+      collectedAt: hoursAgo(68, now),
+      notes: null,
+    },
+    {
+      id: "c1000000-0000-4000-8000-000000000003",
+      donationId: donations[10]!.id,
+      ngoId: FEEDING_HANDS_ID,
+      donorId: DONOR_ID,
+      collectedQuantity: 8,
+      collectedAt: hoursAgo(42, now),
+      notes: "Distributed at the Halasuru night shelter.",
+    },
+  ];
+
+  return {
+    seededAt: now.toISOString(),
+    profiles: [
+      profile(DONOR_ID, {
+        fullName: "Ananya Rao",
+        email: "ananya@saffronkitchen.in",
+        role: "donor",
+        organizationName: "Saffron Kitchen",
+        organizationType: "Restaurant",
+        phone: "+91 98450 22178",
+        address: "14, 5th Cross, Indiranagar, Bengaluru",
+        latitude: 12.9719,
+        longitude: 77.6412,
+        verificationStatus: "verified",
+        createdAt: hoursAgo(24 * 120, now),
+        updatedAt: hoursAgo(24 * 2, now),
+      }),
+      profile(ANNAPURNA_ID, {
+        fullName: "Meera Krishnan",
+        email: "meera@annapurnatrust.org",
+        role: "ngo",
+        organizationName: "Annapurna Trust",
+        organizationType: "Community kitchen",
+        address: "32, 1st Main, Indiranagar, Bengaluru",
+        latitude: 12.9784,
+        longitude: 77.6408,
+        verificationStatus: "verified",
+        registrationNumber: "NGO/KA/2019/0142",
+        verificationNotes:
+          "Registered with the Karnataka Societies Registrar. Reference available on request.",
+      }),
+      profile(FEEDING_HANDS_ID, {
+        fullName: "Joseph Mathew",
+        email: "joseph@feedinghands.org",
+        role: "ngo",
+        organizationName: "Feeding Hands Foundation",
+        organizationType: "Food relief NGO",
+        address: "7, Old Madras Road, Bengaluru",
+        latitude: 12.9634,
+        longitude: 77.6368,
+        verificationStatus: "verified",
+        registrationNumber: "NGO/KA/2016/0087",
+      }),
+      profile(ROTI_BANK_ID, {
+        fullName: "Sana Iqbal",
+        email: "sana@rotibank.in",
+        role: "ngo",
+        organizationName: "Roti Bank Bengaluru",
+        organizationType: "Food relief NGO",
+        address: "18, Mosque Road, Frazer Town, Bengaluru",
+        latitude: 12.996,
+        longitude: 77.621,
+        verificationStatus: "pending",
+        registrationNumber: "NGO/KA/2023/0311",
+        verificationNotes:
+          "New partner. Registration certificate uploaded to the LastPlate team.",
+      }),
+      profile(SEVA_ID, {
+        fullName: "Ravi Deshpande",
+        email: "ravi@sevameals.org",
+        role: "ngo",
+        organizationName: "Seva Meal Collective",
+        organizationType: "Community kitchen",
+        address: "5, 8th Block, Koramangala, Bengaluru",
+        latitude: 12.9345,
+        longitude: 77.6101,
+        verificationStatus: "verified",
+        registrationNumber: "NGO/KA/2020/0204",
+      }),
+      profile(DEMO_ADMIN_ID, {
+        fullName: "Priya Nair",
+        email: "priya@lastplate.org",
+        role: "admin",
+        organizationName: "LastPlate Operations",
+        organizationType: "Platform administration",
+        phone: "+91 80 4000 1200",
+        address: "LastPlate, Bengaluru",
+        verificationStatus: "verified",
+        createdAt: hoursAgo(24 * 180, now),
+      }),
+    ],
+    donations,
+    collectionRequests,
+    collectionRecords,
+  };
+}

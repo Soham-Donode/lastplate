@@ -1,0 +1,46 @@
+{
+  "name": "lastplate",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "db:migrate": "sh -c 'set -a; . ./.env.local; set +a; prisma migrate deploy'",
+    "db:pull": "sh -c 'set -a; . ./.env.local; set +a; prisma db pull'",
+    "db:generate": "prisma generate",
+    "db:seed": "node --env-file=.env.local prisma/seed.mjs",
+    "db:studio": "sh -c 'set -a; . ./.env.local; set +a; prisma studio'"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "@prisma/client": "^6.19.3",
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.76.1",
+    "clsx": "^2.1.1",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^0.545.0",
+    "next": "16.4.3",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-hook-form": "^7.65.0",
+    "server-only": "^0.0.1",
+    "tailwind-merge": "^3.3.1",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "^4",
+    "@types/leaflet": "^1.9.22",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.3",
+    "prisma": "^6.19.3",
+    "puppeteer-core": "^25.16.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

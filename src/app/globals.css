@@ -1,0 +1,277 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+
+  --color-ink: #171717;
+  --color-ink-soft: #262626;
+  --color-paper: #ffffff;
+  --color-canvas: #fafafa;
+  --color-surface: #f5f5f5;
+  --color-subtle: #eeeeee;
+  --color-line: #e5e5e5;
+  --color-line-strong: #d4d4d4;
+  --color-muted: #737373;
+  --color-secondary: #525252;
+  --color-frame: #f1f1ef;
+
+  --color-green: #27864a;
+  --color-green-text: #27864a;
+  --color-green-dark: #176638;
+  --color-green-deep: #124f2b;
+  --color-green-light: #eaf5ed;
+  --color-green-solid: #176638;
+  --color-green-solid-active: #124f2b;
+
+  --radius-xs: 6px;
+  --radius-control: 9px;
+  --radius-card: 12px;
+  --radius-panel: 16px;
+  --radius-frame: 20px;
+
+  --shadow-pop: 0 12px 32px -8px rgb(23 23 23 / 0.14),
+    0 2px 6px rgb(23 23 23 / 0.05);
+}
+
+.dark {
+  --color-ink: #f5f5f5;
+  --color-ink-soft: #e5e5e5;
+  --color-paper: #1d1d1d;
+  --color-canvas: #171717;
+  --color-surface: #262626;
+  --color-subtle: #303030;
+  --color-line: #353535;
+  --color-line-strong: #4a4a4a;
+  --color-muted: #a8a8a8;
+  --color-secondary: #d4d4d4;
+  --color-frame: #111111;
+
+  --color-green-text: #66d492;
+  --color-green-dark: #86d7a2;
+  --color-green-deep: #54c181;
+  --color-green-light: #17351f;
+  --color-green-solid: #1e7442;
+  --color-green-solid-active: #175a33;
+
+  --shadow-pop: 0 16px 40px -10px rgb(0 0 0 / 0.65),
+    0 2px 8px rgb(0 0 0 / 0.35);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-frame);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-green-light);
+    color: var(--color-green-dark);
+  }
+
+  .dark ::selection {
+    background-color: #245a36;
+    color: #c8f2d7;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-green);
+    outline-offset: 2px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@utility bar-stripes {
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--color-line-strong) 0 1.5px,
+    transparent 1.5px 5.5px
+  );
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Leaflet map surface and markers
+   --------------------------------------------------------------------------- */
+
+.leaflet-container {
+  isolation: isolate;
+  z-index: 0;
+  background: var(--color-surface);
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+}
+
+/* Keep the OpenStreetMap tiles muted so the interface stays black, white and
+   green without requiring a paid tile provider or API key. */
+.leaflet-tile-pane {
+  filter: grayscale(1) contrast(0.92) brightness(1.04);
+}
+
+.dark .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) grayscale(0.45) brightness(0.78)
+    contrast(1.12);
+}
+
+.leaflet-control-zoom a,
+.leaflet-control-zoom a:hover {
+  border-color: var(--color-line);
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.leaflet-control-zoom a:hover {
+  background: var(--color-surface);
+}
+
+.leaflet-bar {
+  border-color: var(--color-line);
+  box-shadow: var(--shadow-pop);
+}
+
+.leaflet-control-attribution {
+  background: color-mix(in srgb, var(--color-paper) 88%, transparent) !important;
+  color: var(--color-muted);
+  font-size: 10px;
+}
+
+.leaflet-control-attribution a {
+  color: var(--color-green-dark);
+}
+
+.leaflet-tooltip {
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-pop);
+  font-size: 11px;
+}
+
+.leaflet-tooltip-top::before {
+  border-top-color: var(--color-line);
+}
+
+.lp-map-marker,
+.lp-location-marker {
+  background: transparent;
+  border: 0;
+}
+
+.lp-map-pin {
+  display: flex;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 3px solid var(--color-paper);
+  border-radius: 9999px;
+  background: var(--color-green-light);
+  box-shadow:
+    0 10px 24px -8px rgb(0 0 0 / 0.4),
+    0 2px 6px rgb(0 0 0 / 0.16);
+}
+
+.lp-map-pin__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lp-map-pin__fallback {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-green-dark);
+  background: var(--color-green-light);
+}
+
+.lp-map-pin__fallback svg {
+  width: 22px;
+  height: 22px;
+}
+
+.lp-map-pin__label {
+  display: block;
+  max-width: 150px;
+  margin: 4px auto 0;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: 9999px;
+  background: var(--color-paper);
+  padding: 2px 8px;
+  color: var(--color-ink);
+  font-size: 10.5px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-shadow: var(--shadow-pop);
+}
+
+.lp-location-pin {
+  position: relative;
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: 7px auto 0;
+  border: 3px solid var(--color-paper);
+  border-radius: 50% 50% 50% 0;
+  background: var(--color-green);
+  box-shadow:
+    0 10px 22px -8px rgb(0 0 0 / 0.45),
+    0 2px 6px rgb(0 0 0 / 0.18);
+  transform: rotate(-45deg);
+}
+
+.lp-location-pin::after {
+  position: absolute;
+  inset: 8px;
+  border-radius: 9999px;
+  background: var(--color-paper);
+  content: "";
+}

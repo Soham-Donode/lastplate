@@ -1,0 +1,40 @@
+LastPlate sample accounts
+=========================
+
+Local app: http://localhost:3000/login
+
+Every sample account uses the password: LastPlate#2026
+
+Food donor — Saffron Kitchen
+  Email:    ananya@saffronkitchen.in
+  Password: LastPlate#2026
+
+Food donor — Green Leaf Hostel
+  Email:    vikram@greenleafhostel.in
+  Password: LastPlate#2026
+
+NGO — Annapurna Trust (verified)
+  Email:    meera@annapurnatrust.org
+  Password: LastPlate#2026
+
+NGO — Feeding Hands Foundation (verified)
+  Email:    joseph@feedinghands.org
+  Password: LastPlate#2026
+
+NGO — Roti Bank Bengaluru (pending verification)
+  Email:    sana@rotibank.in
+  Password: LastPlate#2026
+
+NGO — Seva Meal Collective (verified)
+  Email:    ravi@sevameals.org
+  Password: LastPlate#2026
+
+Administrator — LastPlate Operations
+  Email:    priya@lastplate.org
+  Password: LastPlate#2026
+
+Notes
+-----
+- These are sample accounts for development and review only.
+- Change or delete them before using this project with real organizations.
+- The service role key and database password are never included here.
