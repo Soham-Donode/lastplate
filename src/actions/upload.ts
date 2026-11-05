@@ -5,6 +5,7 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import { requireDonor } from "@/lib/auth";
 import { isDemoMode } from "@/lib/data";
+import { demoUploadsDir } from "@/lib/demo/paths";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 const MAX_BYTES = 5 * 1024 * 1024;
@@ -41,7 +42,7 @@ export async function uploadDonationImageAction(
 
   if (isDemoMode) {
     try {
-      const uploads = path.join(process.cwd(), ".data", "uploads");
+      const uploads = demoUploadsDir();
       await fs.mkdir(uploads, { recursive: true });
       await fs.writeFile(
         path.join(uploads, filename),

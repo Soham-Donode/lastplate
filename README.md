@@ -127,6 +127,24 @@ Demo data is deliberately relative to the seed time, so deadlines stay
 realistic. It is not production data and is never used when Supabase
 credentials are present.
 
+On serverless hosts the project directory is read-only. The demo workspace then
+lives in the OS temp directory (`/tmp/lastplate-demo`) and falls back to memory
+if that is unavailable, so it resets on cold starts. That is expected for a
+demo; use Supabase for durable data.
+
+### Deploying to Vercel
+
+`.env.local` is git-ignored and is **not** uploaded to Vercel. Configure the
+variables in **Project → Settings → Environment Variables** instead:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` (or `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`)
+- `SUPABASE_SERVICE_ROLE_KEY` (server-only, used by the seed script)
+- `DATABASE_URL` and `DIRECT_URL` (only needed for migrations/seed scripts)
+
+If the two public Supabase variables are missing, the deployment starts in demo
+mode and works without a database.
+
 ### Supabase setup
 
 1. Create a Supabase project.
@@ -267,11 +285,11 @@ supabase/migrations/          Canonical schema, RLS, RPCs, storage policies
 
 ## Design
 
-The interface uses only black, white/grey, and green (`#27864A`, with
-`#176638` and `#EAF5ED` support tones). It is mobile-first, uses Inter, and
-avoids gradients, glass effects, and decorative motion. Theme tokens live in
-`src/app/globals.css`; dark mode overrides the same tokens and is controlled by
-the theme toggle in the topbar, public header, and auth pages.
+The interface uses black, white/grey, and a single light-blue accent
+(`#A6CEE3`, with deeper `#14556F` tones for text). It is mobile-first, uses
+Inter, and avoids gradients, glass effects, and decorative motion. Theme tokens
+live in `src/app/globals.css`; dark mode overrides the same tokens and is
+controlled by the theme toggle in the topbar, public header, and auth pages.
 
 Maps use Leaflet with OpenStreetMap tiles, so no API key or paid mapping
 service is required. Tiles are muted with CSS to match the palette. Donation

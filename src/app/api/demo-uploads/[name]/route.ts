@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { NextResponse } from "next/server";
+import { demoUploadsDir } from "@/lib/demo/paths";
 
 const CONTENT_TYPES: Record<string, string> = {
   jpg: "image/jpeg",
@@ -27,9 +28,7 @@ export async function GET(
   }
 
   try {
-    const file = await readFile(
-      path.join(process.cwd(), ".data", "uploads", name),
-    );
+    const file = await readFile(path.join(demoUploadsDir(), name));
 
     return new NextResponse(new Uint8Array(file), {
       headers: {
