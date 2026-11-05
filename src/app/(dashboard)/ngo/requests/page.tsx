@@ -65,7 +65,7 @@ export default async function NgoRequestsPage({
       />
 
       <div
-        className="scrollbar-none flex w-fit max-w-full items-center gap-1 overflow-x-auto rounded-control border border-line bg-paper p-1"
+        className="scrollbar-none flex w-fit max-w-full items-center gap-1 overflow-x-auto rounded-control border border-line bg-surface p-1"
         role="tablist"
         aria-label="Filter requests by status"
       >
@@ -90,7 +90,7 @@ export default async function NgoRequestsPage({
               className={cn(
                 "inline-flex h-8 shrink-0 items-center gap-1.5 rounded-xs px-3 text-[12.5px] transition-colors",
                 active
-                  ? "bg-green-light font-medium text-green-dark"
+                  ? "bg-accent-soft font-medium text-accent-strong"
                   : "text-secondary hover:bg-surface hover:text-ink",
               )}
             >
@@ -98,7 +98,7 @@ export default async function NgoRequestsPage({
               <span
                 className={cn(
                   "tabular text-[10.5px]",
-                  active ? "text-green-dark/70" : "text-muted",
+                  active ? "text-accent-ink" : "text-muted",
                 )}
               >
                 {count}
@@ -137,7 +137,7 @@ export default async function NgoRequestsPage({
               <div className="flex items-start gap-3">
                 <span
                   aria-hidden="true"
-                  className="mt-0.5 inline-flex size-9 shrink-0 items-center justify-center rounded-control border border-line bg-surface text-muted"
+                  className="mt-0.5 inline-flex size-9 shrink-0 items-center justify-center rounded-control border border-line/60 bg-surface text-muted"
                 >
                   <UtensilsCrossed className="size-[17px]" strokeWidth={1.7} />
                 </span>
@@ -148,7 +148,7 @@ export default async function NgoRequestsPage({
                       {request.donation ? (
                         <Link
                           href={`/ngo/donations/${request.donation.id}`}
-                          className="truncate text-[13.5px] font-medium text-ink transition-colors hover:text-green-dark"
+                          className="truncate text-[13.5px] font-medium text-ink transition-colors hover:text-accent-strong"
                         >
                           {request.donation.title}
                         </Link>

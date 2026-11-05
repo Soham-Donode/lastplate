@@ -27,7 +27,7 @@ export default async function ForgotPasswordPage({
     <AuthShell>
       {isDemoMode ? (
         <div>
-          <span className="inline-flex size-10 items-center justify-center rounded-full bg-green-light text-green-dark">
+          <span className="inline-flex size-10 items-center justify-center rounded-full bg-accent-soft text-accent-strong">
             <Leaf className="size-5" strokeWidth={1.8} />
           </span>
           <h1 className="mt-4 text-[30px] font-semibold leading-[1.1] tracking-[-0.04em] text-ink sm:text-[34px]">

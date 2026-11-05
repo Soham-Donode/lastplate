@@ -61,7 +61,7 @@ export function CollectionSummary({
             cy="66"
             r={radius}
             fill="none"
-            stroke="var(--color-green)"
+            stroke="var(--color-accent-ink)"
             strokeWidth="11"
             strokeLinecap="round"
             strokeDasharray={circumference}
@@ -82,7 +82,7 @@ export function CollectionSummary({
           <LegendRow
             label="Collected"
             value={counts.collected}
-            dotClassName="bg-green"
+            dotClassName="bg-accent-ink"
           />
           <LegendRow
             label="Active listings"

@@ -80,7 +80,7 @@ export default async function AdminDonationsPage({
 
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div
-          className="scrollbar-none flex w-fit max-w-full items-center gap-1 overflow-x-auto rounded-control border border-line bg-paper p-1"
+          className="scrollbar-none flex w-fit max-w-full items-center gap-1 overflow-x-auto rounded-control border border-line bg-surface p-1"
           role="tablist"
           aria-label="Filter donations by status"
         >
@@ -96,7 +96,7 @@ export default async function AdminDonationsPage({
                 className={cn(
                   "inline-flex h-8 shrink-0 items-center rounded-xs px-3 text-[12.5px] transition-colors",
                   active
-                    ? "bg-green-light font-medium text-green-dark"
+                    ? "bg-accent-soft font-medium text-accent-strong"
                     : "text-secondary hover:bg-surface hover:text-ink",
                 )}
               >
@@ -124,7 +124,7 @@ export default async function AdminDonationsPage({
             defaultValue={query}
             placeholder="Search by food title"
             aria-label="Search donations by food title"
-            className="h-10 w-full rounded-control border border-line bg-paper pl-9 pr-10 text-[13px] text-ink placeholder:text-muted focus:border-green focus:outline-none focus:ring-2 focus:ring-green/15 [&::-webkit-search-cancel-button]:appearance-none"
+            className="h-10 w-full rounded-control border border-line bg-paper pl-9 pr-10 text-[13px] text-ink placeholder:text-muted transition-colors focus:border-accent-ink focus:outline-none focus:ring-2 focus:ring-accent/40 [&::-webkit-search-cancel-button]:appearance-none"
           />
           <button
             type="submit"
@@ -154,7 +154,7 @@ export default async function AdminDonationsPage({
           {filtersActive && (
             <Link
               href="/admin/donations"
-              className="text-[11.5px] font-medium text-green-dark transition-colors hover:text-green-text"
+              className="text-[11.5px] font-medium text-accent-strong transition-colors hover:text-accent-ink"
             >
               Clear filters
             </Link>

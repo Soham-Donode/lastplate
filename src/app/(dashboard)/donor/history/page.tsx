@@ -56,13 +56,13 @@ export default async function HistoryPage() {
       ) : (
         <>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <div className="rounded-card border border-line bg-paper p-5">
+            <div className="glass-surface rounded-card p-5">
               <p className="text-[11.5px] text-muted">Collections completed</p>
               <p className="tabular mt-2 text-[26px] font-semibold leading-none text-ink">
                 {records.length}
               </p>
             </div>
-            <div className="rounded-card border border-line bg-paper p-5">
+            <div className="glass-surface rounded-card p-5">
               <p className="text-[11.5px] text-muted">Food rescued</p>
               <p className="mt-2 flex items-baseline gap-1">
                 <span className="tabular text-[26px] font-semibold leading-none text-ink">
@@ -71,7 +71,7 @@ export default async function HistoryPage() {
                 <span className="text-[12px] text-muted">kg</span>
               </p>
             </div>
-            <div className="rounded-card border border-line bg-paper p-5">
+            <div className="glass-surface rounded-card p-5">
               <p className="text-[11.5px] text-muted">Partner NGOs</p>
               <p className="tabular mt-2 text-[26px] font-semibold leading-none text-ink">
                 {partners}
@@ -81,7 +81,7 @@ export default async function HistoryPage() {
 
           <Card className="p-5 sm:p-6">
             <div className="mb-4 flex items-center gap-1.5">
-              <Leaf className="size-3.5 text-green-text" strokeWidth={1.8} />
+              <Leaf className="size-3.5 text-accent-ink" strokeWidth={1.8} />
               <p className="text-[11.5px] text-muted">
                 Every completed collection is recorded with its quantity and
                 partner organization.

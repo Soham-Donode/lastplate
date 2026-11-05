@@ -117,7 +117,7 @@ export default async function NgoCollectionsPage() {
                         {record.donation ? (
                           <CategoryIcon category={record.donation.category} />
                         ) : (
-                          <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-control border border-line bg-surface text-muted">
+                          <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-control border border-line/60 bg-surface text-muted">
                             <PackageCheck
                               className="size-[17px]"
                               strokeWidth={1.7}
@@ -165,7 +165,7 @@ export default async function NgoCollectionsPage() {
                   {record.donation ? (
                     <CategoryIcon category={record.donation.category} />
                   ) : (
-                    <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-control border border-line bg-surface text-muted">
+                    <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-control border border-line/60 bg-surface text-muted">
                       <PackageCheck
                         className="size-[17px]"
                         strokeWidth={1.7}

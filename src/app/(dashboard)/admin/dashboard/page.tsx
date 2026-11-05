@@ -49,7 +49,7 @@ export default async function AdminDashboardPage() {
               <ShieldCheck className="size-4" strokeWidth={1.8} />
               Review NGOs
               {overview.pendingVerification > 0 && (
-                <span className="ml-0.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-white/20 px-1.5 text-[10.5px] font-medium tabular">
+                <span className="ml-0.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-[#0d3446]/10 px-1.5 text-[10.5px] font-medium tabular">
                   {overview.pendingVerification}
                 </span>
               )}

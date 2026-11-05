@@ -135,7 +135,7 @@ export function DonationForm({
         {errors.root?.message && (
           <div
             role="alert"
-            className="rounded-card border border-line bg-surface px-4 py-3 text-[12.5px] leading-5 text-ink-soft"
+            className="glass-well rounded-card px-4 py-3 text-[12.5px] leading-5 text-ink-soft"
           >
             {errors.root.message}
           </div>
@@ -201,8 +201,8 @@ export function DonationForm({
                   key={option.value}
                   className={
                     foodType === option.value
-                      ? "flex h-10 cursor-pointer items-center justify-center rounded-control border border-green bg-green-light px-3 text-[13px] font-medium text-green-dark has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-green/25"
-                      : "flex h-10 cursor-pointer items-center justify-center rounded-control border border-line bg-paper px-3 text-[13px] text-secondary transition-colors hover:bg-surface has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-green/25"
+                      ? "flex h-10 cursor-pointer items-center justify-center rounded-control border border-accent-strong bg-accent-soft px-3 text-[13px] font-medium text-accent-strong has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-accent/25"
+                      : "flex h-10 cursor-pointer items-center justify-center rounded-control border border-line/70 bg-paper px-3 text-[13px] text-secondary transition-colors hover:bg-surface has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-accent/25"
                   }
                 >
                   <input
@@ -291,10 +291,10 @@ export function DonationForm({
             />
           </Field>
 
-          <label className="flex cursor-pointer items-start gap-3 rounded-control border border-line bg-canvas p-4 sm:col-span-2">
+          <label className="flex cursor-pointer items-start gap-3 glass-well rounded-control p-4 sm:col-span-2">
             <input
               type="checkbox"
-              className="mt-0.5 size-4 shrink-0 accent-[#27864A]"
+              className="mt-0.5 size-4 shrink-0 accent-[#2f7d9f]"
               {...register("foodSafetyConfirmed")}
             />
             <span>
@@ -416,7 +416,7 @@ export function DonationForm({
         <div className="flex flex-col-reverse gap-3 border-t border-line pt-5 sm:flex-row sm:items-center sm:justify-between">
           <p className="flex items-start gap-1.5 text-[11px] leading-4 text-muted">
             <ShieldCheck
-              className="mt-0.5 size-3.5 shrink-0 text-green-text"
+              className="mt-0.5 size-3.5 shrink-0 text-accent-ink"
               strokeWidth={2}
             />
             Only publish food you would be comfortable serving yourself.

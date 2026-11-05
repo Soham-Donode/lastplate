@@ -65,12 +65,12 @@ export function CollectionRequestForm({
 
   if (success) {
     return (
-      <div className="rounded-control border border-green/15 bg-green-light p-4">
-        <p className="flex items-center gap-1.5 text-[12.5px] font-medium text-green-dark">
+      <div className="rounded-control border border-accent/15 bg-accent-soft p-4">
+        <p className="flex items-center gap-1.5 text-[12.5px] font-medium text-accent-strong">
           <Check className="size-4" strokeWidth={2} />
           Request sent
         </p>
-        <p className="mt-1.5 text-[11.5px] leading-5 text-green-dark/85">
+        <p className="mt-1.5 text-[11.5px] leading-5 text-accent-strong/85">
           The donor will review your request. You can follow its status from
           your requests page.
         </p>
@@ -91,7 +91,7 @@ export function CollectionRequestForm({
       {errors.root?.message && (
         <div
           role="alert"
-          className="rounded-control border border-line bg-surface px-3 py-2.5 text-[11.5px] leading-5 text-ink-soft"
+          className="glass-well rounded-control px-3 py-2.5 text-[11.5px] leading-5 text-ink-soft"
         >
           {errors.root.message}
         </div>
@@ -131,7 +131,7 @@ export function CollectionRequestForm({
         />
       </Field>
 
-      <p className="rounded-control bg-canvas px-3 py-2.5 text-[11px] leading-4 text-muted">
+      <p className="glass-well rounded-control px-3 py-2.5 text-[11px] leading-4 text-muted">
         Only request food you can collect and distribute before the pickup and
         safe-consumption deadlines. The donor confirms one NGO per donation.
       </p>

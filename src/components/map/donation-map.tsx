@@ -115,11 +115,11 @@ export function DonationMap({
 
       const circle = L.circle([centre.latitude, centre.longitude], {
         radius: radiusKm * 1000,
-        color: "#27864A",
+        color: "#2f7d9f",
         weight: 1.5,
         opacity: 0.9,
-        fillColor: "#27864A",
-        fillOpacity: 0.06,
+        fillColor: "#a6cee3",
+        fillOpacity: 0.12,
         dashArray: "6 7",
         interactive: false,
       }).addTo(map);
@@ -128,7 +128,7 @@ export function DonationMap({
         radius: 5,
         color: "#ffffff",
         weight: 2,
-        fillColor: "#27864A",
+        fillColor: "#2f7d9f",
         fillOpacity: 1,
         interactive: false,
       })

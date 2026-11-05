@@ -24,7 +24,7 @@ export function RecentCollectionList({
         <li key={record.id} className="flex items-start gap-3 py-3 first:pt-0 last:pb-0">
           <span
             aria-hidden="true"
-            className="mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-green-light text-green-dark"
+            className="mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent-strong"
           >
             <PackageCheck className="size-4" strokeWidth={1.8} />
           </span>

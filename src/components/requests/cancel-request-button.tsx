@@ -41,7 +41,7 @@ export function CancelRequestButton({ requestId }: { requestId: string }) {
   }
 
   return (
-    <div className="rounded-control border border-line bg-canvas p-3">
+    <div className="glass-well rounded-control p-3">
       <p className="text-[11.5px] leading-4 text-secondary">
         Cancel this request? The donation will stay available for other NGOs.
       </p>

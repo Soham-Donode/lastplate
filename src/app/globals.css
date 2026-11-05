@@ -3,67 +3,107 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", sans-serif;
+  /* Apple-style system stack: SF Pro on Apple devices, Inter as the web fallback. */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+    var(--font-inter), "Helvetica Neue", ui-sans-serif, system-ui, "Segoe UI",
+    sans-serif;
 
-  --color-ink: #171717;
-  --color-ink-soft: #262626;
+  --color-ink: #101418;
+  --color-ink-soft: #2a3138;
   --color-paper: #ffffff;
-  --color-canvas: #fafafa;
-  --color-surface: #f5f5f5;
-  --color-subtle: #eeeeee;
-  --color-line: #e5e5e5;
-  --color-line-strong: #d4d4d4;
-  --color-muted: #737373;
-  --color-secondary: #525252;
-  --color-frame: #f1f1ef;
+  --color-canvas: #f5f7f9;
+  --color-surface: #eef1f4;
+  --color-subtle: #e4e9ee;
+  --color-line: #d5dbe1;
+  --color-line-strong: #b3bdc7;
+  --color-muted: #58636e;
+  --color-secondary: #3d4750;
+  --color-frame: #0f1720;
 
-  --color-green: #27864a;
-  --color-green-text: #27864a;
-  --color-green-dark: #176638;
-  --color-green-deep: #124f2b;
-  --color-green-light: #eaf5ed;
-  --color-green-solid: #176638;
-  --color-green-solid-active: #124f2b;
+  /* Accent: a single light blue. Tints for fills, deeper tones for text so
+     contrast stays readable on light surfaces. */
+  --color-accent: #a6cee3;
+  --color-accent-soft: #eaf4fa;
+  --color-accent-ink: #14556f;
+  --color-accent-strong: #1b5e78;
+  --color-accent-solid: #a6cee3;
+  --color-accent-solid-hover: #8fc1da;
 
-  --radius-xs: 6px;
-  --radius-control: 9px;
-  --radius-card: 12px;
-  --radius-panel: 16px;
-  --radius-frame: 20px;
+  --radius-xs: 7px;
+  --radius-control: 11px;
+  --radius-card: 18px;
+  --radius-panel: 22px;
+  --radius-frame: 30px;
 
-  --shadow-pop: 0 12px 32px -8px rgb(23 23 23 / 0.14),
-    0 2px 6px rgb(23 23 23 / 0.05);
+  --shadow-pop: 0 18px 44px -22px rgb(15 23 32 / 0.28),
+    0 3px 10px -4px rgb(15 23 32 / 0.12);
+
+  /* ------------------------------------------------------------------
+     Flat surface tokens — light theme
+     ------------------------------------------------------------------ */
+  --glass-subtle: #f2f4f7;
+  --glass-surface: #ffffff;
+  --glass-strong: #ffffff;
+  --glass-window: #ffffff;
+  --glass-well: #f6f8fa;
+
+  --glass-border: #dfe4ea;
+  --glass-border-soft: #e7ebef;
+  --glass-hairline: #eaeef2;
+
+  --glass-shadow: 0 1px 2px rgb(15 23 32 / 0.05), 0 12px 28px -20px rgb(15 23 32 / 0.16);
+  --glass-shadow-soft: 0 1px 2px rgb(15 23 32 / 0.04), 0 8px 22px -18px rgb(15 23 32 / 0.12);
+  --glass-shadow-hover: 0 2px 4px rgb(15 23 32 / 0.06), 0 18px 38px -22px rgb(15 23 32 / 0.22);
+  --glass-window-shadow: 0 1px 2px rgb(15 23 32 / 0.05), 0 24px 54px -30px rgb(15 23 32 / 0.24);
 }
 
 .dark {
-  --color-ink: #f5f5f5;
-  --color-ink-soft: #e5e5e5;
-  --color-paper: #1d1d1d;
-  --color-canvas: #171717;
-  --color-surface: #262626;
-  --color-subtle: #303030;
-  --color-line: #353535;
-  --color-line-strong: #4a4a4a;
-  --color-muted: #a8a8a8;
-  --color-secondary: #d4d4d4;
-  --color-frame: #111111;
+  --color-ink: #f2f5f7;
+  --color-ink-soft: #dfe5ea;
+  --color-paper: #171b20;
+  --color-canvas: #101317;
+  --color-surface: #1d232a;
+  --color-subtle: #252c34;
+  --color-line: #333b44;
+  --color-line-strong: #4b555f;
+  --color-muted: #98a4ae;
+  --color-secondary: #c2cbd3;
+  --color-frame: #0a0d11;
 
-  --color-green-text: #66d492;
-  --color-green-dark: #86d7a2;
-  --color-green-deep: #54c181;
-  --color-green-light: #17351f;
-  --color-green-solid: #1e7442;
-  --color-green-solid-active: #175a33;
+  --color-accent: #a6cee3;
+  --color-accent-soft: #16303d;
+  --color-accent-ink: #bfe3f4;
+  --color-accent-strong: #d6eef9;
+  --color-accent-solid: #a6cee3;
+  --color-accent-solid-hover: #bcdcee;
 
-  --shadow-pop: 0 16px 40px -10px rgb(0 0 0 / 0.65),
-    0 2px 8px rgb(0 0 0 / 0.35);
+  --shadow-pop: 0 20px 52px -22px rgb(0 0 0 / 0.7),
+    0 4px 14px -6px rgb(0 0 0 / 0.45);
+
+  /* ------------------------------------------------------------------
+     Flat surface tokens — dark theme
+     ------------------------------------------------------------------ */
+  --glass-subtle: #20262d;
+  --glass-surface: #171b20;
+  --glass-strong: #171b20;
+  --glass-window: #14181d;
+  --glass-well: #1b2128;
+
+  --glass-border: #333b44;
+  --glass-border-soft: #2a323a;
+  --glass-hairline: #2a323a;
+
+  --glass-shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 14px 32px -22px rgb(0 0 0 / 0.6);
+  --glass-shadow-soft: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 26px -20px rgb(0 0 0 / 0.55);
+  --glass-shadow-hover: 0 2px 4px rgb(0 0 0 / 0.45), 0 20px 40px -24px rgb(0 0 0 / 0.7);
+  --glass-window-shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 26px 58px -30px rgb(0 0 0 / 0.7);
 }
 
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
     color-scheme: light;
+    scroll-behavior: smooth;
   }
 
   html.dark {
@@ -71,25 +111,31 @@
   }
 
   body {
-    background-color: var(--color-frame);
+    background-color: var(--color-canvas);
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-feature-settings:
+      "cv02" 1,
+      "cv03" 1,
+      "cv04" 1,
+      "cv11" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
 
   ::selection {
-    background-color: var(--color-green-light);
-    color: var(--color-green-dark);
+    background-color: var(--color-accent);
+    color: #0d3446;
   }
 
   .dark ::selection {
-    background-color: #245a36;
-    color: #c8f2d7;
+    background-color: #2f627c;
+    color: #eaf6fc;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-green);
+    outline: 2px solid var(--color-accent-ink);
     outline-offset: 2px;
   }
 
@@ -97,20 +143,85 @@
   h2,
   h3,
   h4 {
-    letter-spacing: -0.02em;
+    letter-spacing: -0.028em;
+  }
+}
+
+@layer components {
+  /* ------------------------------------------------------------------
+     Ambient backdrop
+     A quiet, solid canvas behind every screen. Panels sit flat on it.
+     ------------------------------------------------------------------ */
+  .app-ambient {
+    position: relative;
+    isolation: isolate;
+    background-color: var(--color-canvas);
+  }
+
+  /* ------------------------------------------------------------------
+     Surface primitives
+     Flat, solid panels with hairline borders and soft shadows.
+     ------------------------------------------------------------------ */
+  .glass-subtle,
+  .glass-surface,
+  .glass-strong,
+  .glass-window {
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .glass-subtle {
+    background-color: var(--glass-subtle);
+    box-shadow: var(--glass-shadow-soft);
+  }
+
+  .glass-surface {
+    background-color: var(--glass-surface);
+  }
+
+  .glass-strong {
+    background-color: var(--glass-strong);
+  }
+
+  .glass-window {
+    background-color: var(--glass-window);
+    box-shadow: var(--glass-window-shadow);
+  }
+
+  /* Quiet inset wells for metadata, inputs and nested rows. */
+  .glass-well {
+    border: 1px solid var(--glass-border-soft);
+    background-color: var(--glass-well);
+  }
+
+  /* Interactive card treatment: lift a hair on hover. */
+  .glass-card {
+    transition:
+      background-color 240ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 240ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 240ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .glass-card:hover {
+    border-color: var(--color-line-strong);
+    box-shadow: var(--glass-shadow-hover);
+    transform: translateY(-2px);
+  }
+
+  .glass-divider {
+    border-color: var(--glass-hairline);
+  }
+
+  /* Kept as a no-op so existing markup using it stays harmless. */
+  .glass-sheen {
+    position: relative;
+    overflow: hidden;
   }
 }
 
 @utility tabular {
   font-variant-numeric: tabular-nums;
-}
-
-@utility bar-stripes {
-  background-image: repeating-linear-gradient(
-    135deg,
-    var(--color-line-strong) 0 1.5px,
-    transparent 1.5px 5.5px
-  );
 }
 
 @utility scrollbar-none {
@@ -144,14 +255,13 @@
 }
 
 /* Keep the OpenStreetMap tiles muted so the interface stays black, white and
-   green without requiring a paid tile provider or API key. */
+   light blue without requiring a paid tile provider or API key. */
 .leaflet-tile-pane {
-  filter: grayscale(1) contrast(0.92) brightness(1.04);
+  filter: grayscale(1) contrast(0.94) brightness(1.02);
 }
 
 .dark .leaflet-tile-pane {
-  filter: invert(1) hue-rotate(180deg) grayscale(0.45) brightness(0.78)
-    contrast(1.12);
+  filter: invert(1) grayscale(1) brightness(0.78) contrast(1.12);
 }
 
 .leaflet-control-zoom a,
@@ -177,7 +287,7 @@
 }
 
 .leaflet-control-attribution a {
-  color: var(--color-green-dark);
+  color: var(--color-accent-ink);
 }
 
 .leaflet-tooltip {
@@ -207,7 +317,7 @@
   overflow: hidden;
   border: 3px solid var(--color-paper);
   border-radius: 9999px;
-  background: var(--color-green-light);
+  background: var(--color-accent-soft);
   box-shadow:
     0 10px 24px -8px rgb(0 0 0 / 0.4),
     0 2px 6px rgb(0 0 0 / 0.16);
@@ -225,8 +335,8 @@
   height: 100%;
   align-items: center;
   justify-content: center;
-  color: var(--color-green-dark);
-  background: var(--color-green-light);
+  color: var(--color-accent-ink);
+  background: var(--color-accent-soft);
 }
 
 .lp-map-pin__fallback svg {
@@ -261,7 +371,7 @@
   margin: 7px auto 0;
   border: 3px solid var(--color-paper);
   border-radius: 50% 50% 50% 0;
-  background: var(--color-green);
+  background: var(--color-accent);
   box-shadow:
     0 10px 22px -8px rgb(0 0 0 / 0.45),
     0 2px 6px rgb(0 0 0 / 0.18);

@@ -9,8 +9,8 @@ import { VerificationActions } from "@/components/admin/verification-actions";
 function VerificationBadge({ status }: { status: VerificationStatus }) {
   if (status === "verified") {
     return (
-      <Badge tone="green">
-        <StatusDot tone="green" />
+      <Badge tone="accent">
+        <StatusDot tone="accent" />
         Verified
       </Badge>
     );
@@ -30,8 +30,8 @@ function VerificationBadge({ status }: { status: VerificationStatus }) {
 
 function AccountBadge({ active }: { active: boolean }) {
   return active ? (
-    <Badge tone="green">
-      <StatusDot tone="green" />
+    <Badge tone="accent">
+      <StatusDot tone="accent" />
       Active
     </Badge>
   ) : (
@@ -50,7 +50,7 @@ function OrganizationIdentity({
     <div className="flex min-w-0 items-start gap-3">
       <span
         aria-hidden="true"
-        className="mt-0.5 inline-flex size-9 shrink-0 items-center justify-center rounded-control border border-line bg-surface text-muted"
+        className="mt-0.5 inline-flex size-9 shrink-0 items-center justify-center rounded-control border border-line/60 bg-surface text-muted"
       >
         <Building2 className="size-[17px]" strokeWidth={1.7} />
       </span>

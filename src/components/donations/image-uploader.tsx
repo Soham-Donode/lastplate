@@ -76,12 +76,12 @@ export function ImageUploader({
           if (file) void handleFile(file);
         }}
         className={cn(
-          "rounded-card border border-dashed bg-canvas p-3 transition-colors",
-          dragging ? "border-green bg-green-light/40" : "border-line",
+          "glass-subtle rounded-card border-dashed p-3 transition-colors",
+          dragging ? "border-accent-ink bg-accent-soft" : "border-line",
         )}
       >
         {preview ? (
-          <div className="relative overflow-hidden rounded-control border border-line bg-paper">
+          <div className="relative overflow-hidden rounded-control border border-line/70 bg-paper">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={preview}
@@ -90,7 +90,7 @@ export function ImageUploader({
             />
             <div className="absolute right-2 top-2 flex items-center gap-1.5">
               {uploading && (
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-paper/95 px-2 py-1 text-[10.5px] text-secondary shadow-pop">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-paper px-2 py-1 text-[10.5px] text-secondary shadow-pop">
                   <Loader2 className="size-3 animate-spin" strokeWidth={2} />
                   Uploading
                 </span>
@@ -101,7 +101,7 @@ export function ImageUploader({
                 size="icon-sm"
                 onClick={remove}
                 aria-label="Remove image"
-                className="bg-paper/95"
+                className="bg-paper"
                 disabled={uploading}
               >
                 <X className="size-3.5" strokeWidth={2} />
@@ -114,7 +114,7 @@ export function ImageUploader({
             onClick={() => inputRef.current?.click()}
             className="flex w-full flex-col items-center justify-center gap-2 rounded-control px-4 py-8 text-center transition-colors hover:bg-surface"
           >
-            <span className="inline-flex size-10 items-center justify-center rounded-full border border-line bg-paper text-muted">
+            <span className="inline-flex size-10 items-center justify-center rounded-full border border-line/60 bg-paper text-muted">
               <UploadCloud className="size-[18px]" strokeWidth={1.7} />
             </span>
             <span className="flex items-center gap-1.5 text-[12.5px] font-medium text-ink">

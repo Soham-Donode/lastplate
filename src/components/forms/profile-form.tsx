@@ -115,7 +115,7 @@ export function ProfileForm({
       {success && (
         <div
           role="status"
-          className="flex items-center gap-2 rounded-card border border-green/15 bg-green-light px-4 py-3 text-[12.5px] text-green-dark"
+          className="flex items-center gap-2 rounded-card border border-accent/15 bg-accent-soft px-4 py-3 text-[12.5px] text-accent-strong"
         >
           <Check className="size-4" strokeWidth={2} />
           Organization profile updated.
@@ -125,7 +125,7 @@ export function ProfileForm({
       {errors.root?.message && (
         <div
           role="alert"
-          className="rounded-card border border-line bg-surface px-4 py-3 text-[12.5px] text-ink-soft"
+          className="glass-well rounded-card px-4 py-3 text-[12.5px] text-ink-soft"
         >
           {errors.root.message}
         </div>
@@ -286,11 +286,11 @@ export function ProfileForm({
           <div className="flex items-center justify-between gap-4 py-3">
             <dt className="text-[11.5px] text-muted">Verification</dt>
             <dd>
-              <Badge tone={verified ? "green" : "outline"}>
+              <Badge tone={verified ? "accent" : "outline"}>
                 <span
                   className={
                     verified
-                      ? "size-1.5 rounded-full bg-green"
+                      ? "size-1.5 rounded-full bg-accent"
                       : "size-1.5 rounded-full bg-muted"
                   }
                 />

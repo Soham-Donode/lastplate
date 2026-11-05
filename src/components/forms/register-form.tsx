@@ -11,7 +11,7 @@ import {
   type RegisterFormValues,
 } from "@/lib/validations";
 import { organizationTypesForRole } from "@/lib/constants";
-import { Button } from "@/components/ui/button";
+import { Button, buttonStyles } from "@/components/ui/button";
 import { Field, Input, Select, Textarea } from "@/components/ui/input";
 
 export function RegisterForm({
@@ -80,7 +80,7 @@ export function RegisterForm({
   if (createdEmail) {
     return (
       <div>
-        <span className="inline-flex size-10 items-center justify-center rounded-full bg-green-light text-green-dark">
+        <span className="inline-flex size-10 items-center justify-center rounded-full bg-accent-soft text-accent-strong">
           <CheckCircle2 className="size-5" strokeWidth={1.8} />
         </span>
         <h1 className="mt-4 text-[22px] font-semibold tracking-[-0.03em] text-ink">
@@ -92,7 +92,7 @@ export function RegisterForm({
           to activate your LastPlate account, then sign in.
         </p>
         {isNgo && (
-          <p className="mt-3 rounded-control border border-line bg-surface px-3 py-2.5 text-[12px] leading-5 text-secondary">
+          <p className="mt-3 glass-well rounded-control px-3 py-2.5 text-[12px] leading-5 text-secondary">
             NGO accounts are reviewed by the LastPlate team after confirmation.
             You can sign in right away, but donation requests unlock once your
             organization is verified.
@@ -100,7 +100,7 @@ export function RegisterForm({
         )}
         <Link
           href="/login"
-          className="mt-5 inline-flex h-12 w-full items-center justify-center rounded-[10px] bg-green px-4 text-sm font-medium text-white transition-colors hover:bg-green-solid"
+          className={buttonStyles({ className: "mt-5 w-full" })}
         >
           Go to sign in
         </Link>
@@ -118,7 +118,7 @@ export function RegisterForm({
           Already have an account?{" "}
           <Link
             href="/login"
-            className="font-medium text-green-text hover:underline"
+            className="font-medium text-accent-ink hover:underline"
           >
             Sign in
           </Link>
@@ -128,7 +128,7 @@ export function RegisterForm({
       {errors.root?.message && (
         <div
           role="alert"
-          className="rounded-control border border-line bg-surface px-3 py-2.5 text-[12px] leading-5 text-ink-soft"
+          className="glass-well rounded-control px-3 py-2.5 text-[12px] leading-5 text-ink-soft"
         >
           {errors.root.message}
         </div>
@@ -252,7 +252,7 @@ export function RegisterForm({
       </div>
 
       {isNgo && (
-        <div className="rounded-card border border-line bg-surface p-4">
+        <div className="glass-well rounded-card p-4">
           <h2 className="text-[13px] font-medium text-ink">
             NGO verification details
           </h2>
@@ -343,7 +343,7 @@ export function RegisterForm({
       <label className="flex items-start gap-2.5 text-[12px] leading-5 text-secondary">
         <input
           type="checkbox"
-          className="mt-0.5 size-4 shrink-0 rounded-xs border-line accent-green"
+          className="mt-0.5 size-4 shrink-0 rounded-xs border-line accent-accent"
           aria-invalid={Boolean(errors.termsAccepted)}
           {...register("termsAccepted")}
         />
@@ -394,12 +394,12 @@ function RoleOption({
       aria-pressed={active}
       className={`rounded-[10px] border p-4 text-left transition-colors ${
         active
-          ? "border-green bg-green-light"
+          ? "border-accent-strong bg-accent-soft"
           : "border-transparent bg-surface hover:bg-subtle"
       }`}
     >
       <Icon
-        className={`size-4 ${active ? "text-green-dark" : "text-muted"}`}
+        className={`size-4 ${active ? "text-accent-strong" : "text-muted"}`}
         strokeWidth={1.8}
       />
       <span className="mt-2 block text-[12.5px] font-medium text-ink">

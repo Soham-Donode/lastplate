@@ -55,7 +55,7 @@ export function ResetPasswordForm({ email }: { email: string }) {
       {errors.root?.message && (
         <div
           role="alert"
-          className="rounded-control border border-line bg-surface px-3 py-2.5 text-[12px] leading-5 text-ink-soft"
+          className="glass-well rounded-control px-3 py-2.5 text-[12px] leading-5 text-ink-soft"
         >
           {errors.root.message}
         </div>

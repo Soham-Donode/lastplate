@@ -45,7 +45,7 @@ export function ForgotPasswordForm({ notice }: { notice?: string }) {
   if (sentTo) {
     return (
       <div>
-        <span className="inline-flex size-10 items-center justify-center rounded-full bg-green-light text-green-dark">
+        <span className="inline-flex size-10 items-center justify-center rounded-full bg-accent-soft text-accent-strong">
           <CheckCircle2 className="size-5" strokeWidth={1.8} />
         </span>
         <h1 className="mt-4 text-[30px] font-semibold leading-[1.1] tracking-[-0.04em] text-ink sm:text-[34px]">
@@ -79,7 +79,7 @@ export function ForgotPasswordForm({ notice }: { notice?: string }) {
       </div>
 
       {notice && (
-        <div className="rounded-control border border-line bg-surface px-3 py-2.5 text-[12px] leading-5 text-ink-soft">
+        <div className="glass-well rounded-control px-3 py-2.5 text-[12px] leading-5 text-ink-soft">
           {notice}
         </div>
       )}
@@ -87,7 +87,7 @@ export function ForgotPasswordForm({ notice }: { notice?: string }) {
       {errors.root?.message && (
         <div
           role="alert"
-          className="rounded-control border border-line bg-surface px-3 py-2.5 text-[12px] leading-5 text-ink-soft"
+          className="glass-well rounded-control px-3 py-2.5 text-[12px] leading-5 text-ink-soft"
         >
           {errors.root.message}
         </div>

@@ -64,7 +64,7 @@ export function RequestSummary({
             cy="66"
             r={radius}
             fill="none"
-            stroke="var(--color-green)"
+            stroke="var(--color-accent-ink)"
             strokeWidth="11"
             strokeLinecap="round"
             strokeDasharray={circumference}
@@ -90,12 +90,12 @@ export function RequestSummary({
           <LegendRow
             label="Accepted"
             value={counts.accepted}
-            dotClassName="bg-green/60"
+            dotClassName="bg-accent-soft"
           />
           <LegendRow
             label="Completed"
             value={counts.completed}
-            dotClassName="bg-green"
+            dotClassName="bg-accent-ink"
           />
           <LegendRow
             label="Closed"

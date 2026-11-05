@@ -18,7 +18,7 @@ export default function DashboardError({
 
   return (
     <div className="flex min-h-[60vh] items-center justify-center">
-      <div className="w-full max-w-md rounded-panel border border-line bg-paper p-8 text-center">
+      <div className="w-full max-w-md glass-surface rounded-panel p-8 text-center">
         <LogoMark className="mx-auto size-10" />
         <h1 className="mt-5 text-[20px] font-semibold text-ink">
           Something went wrong

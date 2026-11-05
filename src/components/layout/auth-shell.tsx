@@ -12,19 +12,22 @@ export function AuthShell({
   footer?: React.ReactNode;
 }) {
   return (
-    <main className="relative min-h-dvh bg-frame p-3 sm:p-5 lg:p-6">
-      <div className="mx-auto flex min-h-[calc(100dvh-1.5rem)] w-full max-w-[1180px] overflow-hidden rounded-frame border border-line bg-paper shadow-pop sm:min-h-[calc(100dvh-2.5rem)] lg:min-h-[calc(100dvh-3rem)]">
-        <aside className="relative hidden w-[43%] shrink-0 flex-col justify-between overflow-hidden bg-green-solid p-8 lg:flex xl:p-10">
+    <main className="app-ambient relative min-h-dvh p-2.5 sm:p-4 lg:p-6">
+      <div className="glass-window mx-auto flex min-h-[calc(100dvh-1.25rem)] w-full max-w-[1180px] overflow-hidden rounded-[24px] sm:min-h-[calc(100dvh-2rem)] sm:rounded-[28px] lg:min-h-[calc(100dvh-3rem)] lg:rounded-[32px]">
+        <aside className="relative hidden w-[44%] shrink-0 flex-col justify-between overflow-hidden border-r border-line bg-[#0d1418] p-8 lg:flex xl:p-10">
           <Image
             src="/auth-food.jpg"
             alt=""
             aria-hidden="true"
             fill
             priority
-            sizes="(min-width: 1024px) 43vw, 0px"
-            className="object-cover"
+            sizes="(min-width: 1024px) 44vw, 0px"
+            className="scale-105 object-cover grayscale"
           />
-          <div className="absolute inset-0 bg-green-solid/80" aria-hidden="true" />
+          <div
+            className="absolute inset-0 bg-[#0b1116]/72"
+            aria-hidden="true"
+          />
 
           <div className="relative flex items-center justify-between gap-4">
             <Link
@@ -32,17 +35,15 @@ export function AuthShell({
               aria-label="LastPlate home"
               className="inline-flex items-center gap-2.5 rounded-control"
             >
-              <span className="flex size-10 items-center justify-center rounded-[12px] bg-white">
-                <LogoMark className="size-8" />
-              </span>
-              <span className="text-[19px] font-semibold tracking-[-0.03em] text-white">
+              <LogoMark className="size-8" />
+              <span className="text-[19px] font-semibold tracking-[-0.035em] text-white">
                 LastPlate
               </span>
             </Link>
 
             <Link
               href="/"
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-[11.5px] font-medium text-white transition-colors hover:bg-white/15"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/25 px-3 py-1.5 text-[11.5px] font-medium text-white transition-colors duration-200 hover:bg-white/10"
             >
               <ArrowLeft className="size-3.5" strokeWidth={1.8} />
               Back to website
@@ -50,11 +51,11 @@ export function AuthShell({
           </div>
 
           <div className="relative">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[10.5px] font-medium uppercase tracking-[0.12em] text-white/85">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/25 px-2.5 py-1 text-[10.5px] font-medium uppercase tracking-[0.14em] text-white/85">
               <Leaf className="size-3" strokeWidth={2} />
               Less waste, more meals
             </span>
-            <p className="mt-5 max-w-[340px] text-[32px] font-semibold leading-[1.1] tracking-[-0.045em] text-white xl:text-[38px]">
+            <p className="mt-5 max-w-[340px] text-[32px] font-semibold leading-[1.08] tracking-[-0.045em] text-white xl:text-[38px]">
               Good food deserves a second chance.
             </p>
             <p className="mt-4 max-w-[320px] text-[13px] leading-6 text-white/75">
@@ -63,25 +64,25 @@ export function AuthShell({
             </p>
           </div>
 
-          <div className="relative flex items-center justify-between gap-4">
+          <div className="relative flex items-center justify-between gap-4 rounded-[16px] border border-white/20 px-4 py-3">
             <div className="flex items-center gap-1.5" aria-hidden="true">
-              <span className="h-1.5 w-6 rounded-full bg-white" />
+              <span className="h-1.5 w-6 rounded-full bg-accent" />
               <span className="size-1.5 rounded-full bg-white/40" />
               <span className="size-1.5 rounded-full bg-white/40" />
             </div>
-            <p className="text-[10.5px] uppercase tracking-[0.14em] text-white/55">
+            <p className="text-[10px] uppercase tracking-[0.16em] text-white/60">
               Built for food rescue
             </p>
           </div>
         </aside>
 
-        <section className="flex min-w-0 flex-1 flex-col">
+        <section className="relative flex min-w-0 flex-1 flex-col bg-paper">
           <div className="flex items-center justify-between gap-3 px-5 pt-5 sm:px-8 sm:pt-7 lg:justify-end">
             <Logo href="/" className="lg:hidden" />
             <div className="flex items-center gap-2">
               <Link
                 href="/"
-                className="inline-flex items-center gap-1.5 rounded-full border border-line bg-paper px-3 py-1.5 text-[11.5px] font-medium text-secondary transition-colors hover:bg-surface hover:text-ink lg:hidden"
+                className="glass-well inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11.5px] font-medium text-secondary transition-colors hover:text-ink lg:hidden"
               >
                 <ArrowLeft className="size-3.5" strokeWidth={1.8} />
                 Back
@@ -91,21 +92,19 @@ export function AuthShell({
           </div>
 
           <div className="flex flex-1 items-center justify-center px-5 py-8 sm:px-8 lg:px-12 lg:py-10">
-            <div className="w-full max-w-[420px]">
-              {children}
-
-              <p className="mt-8 border-t border-line pt-5 text-center text-[10.5px] leading-4 text-muted">
-                {footer ?? (
-                  <>
-                    <Link href="/" className="hover:text-ink">
-                      LastPlate
-                    </Link>{" "}
-                    · Good food deserves a second chance.
-                  </>
-                )}
-              </p>
-            </div>
+            <div className="w-full max-w-[420px]">{children}</div>
           </div>
+
+          <p className="mx-8 mb-5 border-t border-line pt-5 text-center text-[10.5px] leading-4 text-muted">
+            {footer ?? (
+              <>
+                <Link href="/" className="transition-colors hover:text-ink">
+                  LastPlate
+                </Link>{" "}
+                · Good food deserves a second chance.
+              </>
+            )}
+          </p>
         </section>
       </div>
     </main>

@@ -36,9 +36,9 @@ export function DashboardShell({
   }, [navOpen]);
 
   return (
-    <div className="min-h-dvh bg-frame lg:p-4 2xl:p-5">
-      <div className="mx-auto flex min-h-dvh w-full max-w-[1640px] bg-paper lg:min-h-[calc(100dvh-2rem)] lg:overflow-hidden lg:rounded-frame lg:border lg:border-line 2xl:min-h-[calc(100dvh-2.5rem)]">
-        <aside className="hidden shrink-0 border-r border-line lg:block">
+    <div className="app-ambient min-h-dvh p-0 sm:p-3 lg:p-4 xl:p-5">
+      <div className="glass-window relative mx-auto flex min-h-dvh w-full max-w-[1680px] flex-col overflow-hidden rounded-none sm:min-h-[calc(100dvh-1.5rem)] sm:rounded-[26px] lg:min-h-[calc(100dvh-2rem)] lg:flex-row lg:rounded-[30px] xl:min-h-[calc(100dvh-2.5rem)]">
+        <aside className="hidden shrink-0 border-r border-line bg-surface lg:block">
           <Sidebar
             profile={profile}
             pendingRequests={pendingRequests}
@@ -46,14 +46,14 @@ export function DashboardShell({
           />
         </aside>
 
-        <div className="flex min-w-0 flex-1 flex-col bg-canvas">
+        <div className="relative flex min-w-0 flex-1 flex-col">
           <Topbar
             profile={profile}
             pendingRequests={pendingRequests}
             demo={demo}
             onMenu={() => setNavOpen(true)}
           />
-          <main className="flex-1 px-4 pb-10 sm:px-6 lg:px-8">
+          <main className="flex-1 px-3 pb-8 pt-1 sm:px-5 sm:pb-10 lg:px-6">
             <div className="mx-auto w-full max-w-[1280px]">{children}</div>
           </main>
         </div>
@@ -65,13 +65,13 @@ export function DashboardShell({
             type="button"
             aria-label="Close navigation"
             onClick={() => setNavOpen(false)}
-            className="absolute inset-0 bg-black/40"
+            className="absolute inset-0 bg-ink/40"
           />
           <div
             role="dialog"
             aria-modal="true"
             aria-label="Navigation"
-            className="absolute inset-y-0 left-0 w-[284px] max-w-[85vw] border-r border-line bg-paper shadow-pop"
+            className="glass-strong absolute inset-y-0 left-0 w-[286px] max-w-[86vw] overflow-hidden rounded-r-[26px] border-y-0 border-l-0 shadow-pop"
           >
             <Sidebar
               profile={profile}

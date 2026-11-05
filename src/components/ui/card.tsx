@@ -8,7 +8,7 @@ export function Card({
   return (
     <div
       className={cn(
-        "rounded-card border border-line bg-paper",
+        "glass-surface glass-sheen glass-card rounded-card",
         className,
       )}
       {...props}
@@ -41,7 +41,7 @@ export function Panel({
         <div className="flex items-start justify-between gap-3 px-5 pt-5 sm:px-6 sm:pt-6">
           <div className="min-w-0">
             {title && (
-              <Heading className="text-[15px] font-semibold text-ink">
+              <Heading className="text-[15px] font-semibold tracking-[-0.02em] text-ink">
                 {title}
               </Heading>
             )}

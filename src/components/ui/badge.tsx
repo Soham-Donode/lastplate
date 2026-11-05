@@ -1,13 +1,13 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-type BadgeTone = "neutral" | "green" | "outline" | "dark";
+type BadgeTone = "neutral" | "accent" | "outline" | "dark";
 
 const tones: Record<BadgeTone, string> = {
-  neutral: "border-transparent bg-surface text-secondary",
-  green: "border-transparent bg-green-light text-green-dark",
-  outline: "border-line bg-paper text-secondary",
-  dark: "border-transparent bg-ink text-paper",
+  neutral: "border-line bg-surface text-secondary",
+  accent: "border-accent/60 bg-accent-soft text-accent-ink",
+  outline: "border-line-strong bg-transparent text-secondary",
+  dark: "border-ink bg-ink text-paper",
 };
 
 export function Badge({
@@ -19,7 +19,7 @@ export function Badge({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-xs border px-2 py-0.5 text-[11px] font-medium leading-5 whitespace-nowrap",
+        "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-medium leading-5 whitespace-nowrap",
         tones[tone],
         className,
       )}
@@ -36,7 +36,11 @@ export function StatusDot({ tone = "neutral" }: { tone?: BadgeTone }) {
       aria-hidden="true"
       className={cn(
         "size-1.5 rounded-full",
-        tone === "green" ? "bg-green" : tone === "dark" ? "bg-ink" : "bg-muted",
+        tone === "accent"
+          ? "bg-accent-ink"
+          : tone === "dark"
+            ? "bg-ink"
+            : "bg-muted",
       )}
     />
   );

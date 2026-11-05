@@ -145,7 +145,7 @@ export default async function DonationDetailPage({
               </p>
 
               {donation.additionalInstructions && (
-                <div className="mt-4 rounded-control border border-line bg-canvas p-4">
+                <div className="mt-4 glass-well rounded-control p-4">
                   <p className="flex items-center gap-1.5 text-[11.5px] font-medium text-ink">
                     <Info className="size-3.5 text-muted" strokeWidth={1.8} />
                     Pickup instructions
@@ -215,7 +215,7 @@ export default async function DonationDetailPage({
                         </div>
 
                         {request.message && (
-                          <p className="mt-2 rounded-control bg-canvas px-3 py-2 text-[12px] leading-5 text-secondary">
+                          <p className="mt-2 glass-well rounded-control px-3 py-2 text-[12px] leading-5 text-secondary">
                             “{request.message}”
                           </p>
                         )}
@@ -267,14 +267,14 @@ export default async function DonationDetailPage({
             )}
 
             {donation.status === "available" && (
-              <p className="mt-4 rounded-control bg-green-light px-3 py-2.5 text-[11.5px] leading-4 text-green-dark">
+              <p className="mt-4 rounded-control bg-accent-soft px-3 py-2.5 text-[11.5px] leading-4 text-accent-strong">
                 This listing is visible to verified NGOs. Accept a request to
                 assign the collection.
               </p>
             )}
 
             {donation.status === "expired" && (
-              <p className="mt-4 rounded-control bg-surface px-3 py-2.5 text-[11.5px] leading-4 text-secondary">
+              <p className="mt-4 glass-well rounded-control px-3 py-2.5 text-[11.5px] leading-4 text-secondary">
                 This listing passed its safe-consumption deadline and is no
                 longer visible to NGOs.
               </p>
@@ -311,7 +311,7 @@ export default async function DonationDetailPage({
                       deadlineState === "overdue"
                         ? "text-muted"
                         : deadlineState === "soon"
-                          ? "text-green-dark"
+                          ? "text-accent-strong"
                           : "text-muted",
                     )}
                   >
@@ -324,7 +324,7 @@ export default async function DonationDetailPage({
 
           <Card className="p-5">
             <h2 className="flex items-center gap-1.5 text-[15px] font-semibold text-ink">
-              <ShieldCheck className="size-4 text-green-text" strokeWidth={1.8} />
+              <ShieldCheck className="size-4 text-accent-ink" strokeWidth={1.8} />
               Food safety
             </h2>
             <div className="mt-2">

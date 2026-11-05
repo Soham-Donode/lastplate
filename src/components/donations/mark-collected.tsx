@@ -38,7 +38,7 @@ export function MarkCollectedButton({ donationId }: { donationId: string }) {
   }
 
   return (
-    <div className="w-full rounded-card border border-line bg-paper p-4 text-left">
+    <div className="w-full glass-surface rounded-card p-4 text-left">
       <p className="text-[12.5px] font-medium text-ink">
         Confirm this collection
       </p>

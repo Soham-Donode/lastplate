@@ -49,8 +49,8 @@ export default async function AdminSettingsPage() {
           <div className="flex items-center justify-between gap-4 py-3">
             <dt className="text-[11.5px] text-muted">Account status</dt>
             <dd>
-              <Badge tone={profile.isActive ? "green" : "neutral"}>
-                <StatusDot tone={profile.isActive ? "green" : "neutral"} />
+              <Badge tone={profile.isActive ? "accent" : "neutral"}>
+                <StatusDot tone={profile.isActive ? "accent" : "neutral"} />
                 {profile.isActive ? "Active" : "Disabled"}
               </Badge>
             </dd>
@@ -66,7 +66,7 @@ export default async function AdminSettingsPage() {
 
       <Card className="p-5 sm:p-6">
         <h2 className="flex items-center gap-2 text-[15px] font-semibold text-ink">
-          <ShieldCheck className="size-4 text-green-text" strokeWidth={1.8} />
+          <ShieldCheck className="size-4 text-accent-ink" strokeWidth={1.8} />
           Administration safeguards
         </h2>
         <ul className="mt-3 space-y-2.5 text-[12px] leading-5 text-secondary">

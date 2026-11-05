@@ -9,23 +9,33 @@ export function LogoMark({ className }: { className?: string }) {
       aria-label="LastPlate"
       className={cn("size-8 shrink-0", className)}
     >
-      <rect width="32" height="32" rx="9" className="fill-green" />
+      <rect width="32" height="32" rx="9" fill="#a6cee3" />
+      <rect
+        x="0.5"
+        y="0.5"
+        width="31"
+        height="31"
+        rx="8.5"
+        fill="none"
+        stroke="#14556f"
+        strokeOpacity="0.35"
+      />
       <circle
         cx="16"
         cy="17.5"
         r="7.75"
         fill="none"
-        stroke="white"
+        stroke="#0d3446"
         strokeWidth="1.6"
       />
       <path
         d="M16 21.8c2.9 0 4.5-1.9 4.5-4.7-2.9 0-4.5 1.9-4.5 4.7Z"
-        fill="white"
+        fill="#0d3446"
       />
       <path
         d="M15.8 12.4c0-2.7 1.6-4.4 4.2-4.4 0 2.7-1.6 4.4-4.2 4.4Z"
-        fill="white"
-        fillOpacity="0.7"
+        fill="#0d3446"
+        fillOpacity="0.6"
       />
     </svg>
   );
@@ -47,15 +57,15 @@ export function Logo({
       href={href}
       onClick={onClick}
       className={cn(
-        "inline-flex items-center gap-2.5 rounded-control",
+        "group inline-flex items-center gap-2.5 rounded-control",
         className,
       )}
       aria-label="LastPlate home"
     >
-      <LogoMark />
+      <LogoMark className="transition-transform duration-200 group-hover:scale-[1.04]" />
       <span
         className={cn(
-          "text-[19px] font-semibold tracking-[-0.03em] text-ink",
+          "text-[19px] font-semibold tracking-[-0.035em] text-ink",
           wordmarkClassName,
         )}
       >

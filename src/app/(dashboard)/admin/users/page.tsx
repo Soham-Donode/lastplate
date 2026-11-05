@@ -172,7 +172,7 @@ export default async function AdminUsersPage({
           </div>
           <Link
             href="/admin/users?verification=pending"
-            className="text-[11.5px] font-medium text-green-dark transition-colors hover:text-green-text"
+            className="text-[11.5px] font-medium text-accent-strong transition-colors hover:text-accent-ink"
           >
             Review pending NGOs
           </Link>

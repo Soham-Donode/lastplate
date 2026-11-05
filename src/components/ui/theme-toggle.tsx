@@ -23,7 +23,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       onClick={toggleTheme}
       title="Toggle dark mode"
       className={cn(
-        "inline-flex size-10 items-center justify-center rounded-full border border-line bg-paper text-secondary transition-colors hover:bg-surface hover:text-ink",
+        "glass-well inline-flex size-10 items-center justify-center rounded-full text-secondary transition-[background-color,border-color,color,transform] duration-200 hover:-translate-y-px hover:text-ink",
         className,
       )}
     >

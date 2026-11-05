@@ -18,9 +18,9 @@ import { cn } from "@/lib/utils";
 
 const donationStatusConfig: Record<
   DonationStatus,
-  { label: string; tone: "green" | "outline" | "neutral" | "dark"; dot: boolean }
+  { label: string; tone: "accent" | "outline" | "neutral" | "dark"; dot: boolean }
 > = {
-  available: { label: "Available", tone: "green", dot: true },
+  available: { label: "Available", tone: "accent", dot: true },
   assigned: { label: "Assigned", tone: "outline", dot: true },
   collected: { label: "Collected", tone: "neutral", dot: true },
   expired: { label: "Expired", tone: "neutral", dot: false },
@@ -45,7 +45,7 @@ export function DonationStatusBadge({
         <StatusDot
           tone={
             status === "available" || status === "collected"
-              ? "green"
+              ? "accent"
               : status === "assigned"
                 ? "dark"
                 : "neutral"
@@ -59,13 +59,13 @@ export function DonationStatusBadge({
 
 const requestStatusConfig: Record<
   CollectionRequestStatus,
-  { label: string; tone: "green" | "outline" | "neutral"; dot: boolean }
+  { label: string; tone: "accent" | "outline" | "neutral"; dot: boolean }
 > = {
   pending: { label: "Pending", tone: "outline", dot: true },
-  accepted: { label: "Accepted", tone: "green", dot: true },
+  accepted: { label: "Accepted", tone: "accent", dot: true },
   rejected: { label: "Rejected", tone: "neutral", dot: false },
   cancelled: { label: "Cancelled", tone: "neutral", dot: false },
-  completed: { label: "Completed", tone: "green", dot: true },
+  completed: { label: "Completed", tone: "accent", dot: true },
 };
 
 export function RequestStatusBadge({
@@ -87,7 +87,7 @@ export function RequestStatusBadge({
     >
       {config.dot && (
         <StatusDot
-          tone={status === "pending" ? "dark" : "green"}
+          tone={status === "pending" ? "dark" : "accent"}
         />
       )}
       {config.label}
@@ -118,7 +118,7 @@ export function CategoryIcon({
     <span
       aria-hidden="true"
       className={cn(
-        "inline-flex size-9 shrink-0 items-center justify-center rounded-control border border-line bg-surface text-muted",
+        "inline-flex size-9 shrink-0 items-center justify-center rounded-control border border-line/60 bg-surface text-muted",
         className,
       )}
     >

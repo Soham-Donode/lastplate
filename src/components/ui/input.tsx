@@ -3,10 +3,10 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const controlBase =
-  "w-full rounded-control border border-line bg-paper px-3 text-sm text-ink placeholder:text-muted transition-[border-color,box-shadow] duration-150 focus:border-green focus:outline-none focus:ring-2 focus:ring-green/15 disabled:cursor-not-allowed disabled:bg-surface disabled:opacity-70";
+  "glass-well w-full rounded-control px-3 text-sm text-ink placeholder:text-muted transition-[border-color,box-shadow,background-color] duration-200 focus:border-accent-ink/60 focus:bg-paper focus:outline-none focus:ring-[3px] focus:ring-accent/40 disabled:cursor-not-allowed disabled:opacity-55";
 
 const largeField =
-  "h-12 rounded-[10px] border-transparent bg-surface px-4 text-[14px] focus:bg-paper";
+  "h-12 rounded-[13px] px-4 text-[14px]";
 
 export function Input({
   className,
@@ -35,7 +35,7 @@ export function Textarea({
       className={cn(
         controlBase,
         fieldSize === "lg"
-          ? "min-h-24 rounded-[10px] border-transparent bg-surface px-4 py-3 text-[14px] leading-6 focus:bg-paper"
+          ? "min-h-24 rounded-[13px] px-4 py-3 text-[14px] leading-6"
           : "min-h-24 py-2.5 leading-6",
         className,
       )}

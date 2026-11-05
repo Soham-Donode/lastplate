@@ -151,7 +151,7 @@ export default async function NgoDonationDetailPage({
               </p>
 
               {donation.additionalInstructions && (
-                <div className="mt-4 rounded-control border border-line bg-canvas p-4">
+                <div className="mt-4 glass-well rounded-control p-4">
                   <p className="flex items-center gap-1.5 text-[11.5px] font-medium text-ink">
                     <Info className="size-3.5 text-muted" strokeWidth={1.8} />
                     Pickup instructions
@@ -226,7 +226,7 @@ export default async function NgoDonationDetailPage({
                 </div>
 
                 {myRequest.message && (
-                  <p className="mt-3 rounded-control bg-canvas px-3 py-2 text-[12px] leading-5 text-secondary">
+                  <p className="mt-3 glass-well rounded-control px-3 py-2 text-[12px] leading-5 text-secondary">
                     “{myRequest.message}”
                   </p>
                 )}
@@ -243,7 +243,7 @@ export default async function NgoDonationDetailPage({
 
                 {myRequest.status === "accepted" && assignedToMe && (
                   <div className="mt-4 border-t border-line pt-4">
-                    <p className="mb-3 rounded-control bg-green-light px-3 py-2.5 text-[11.5px] leading-4 text-green-dark">
+                    <p className="mb-3 rounded-control bg-accent-soft px-3 py-2.5 text-[11.5px] leading-4 text-accent-strong">
                       Your request was accepted. Collect the food before the
                       pickup deadline, then confirm the collection.
                     </p>
@@ -252,20 +252,20 @@ export default async function NgoDonationDetailPage({
                 )}
 
                 {myRequest.status === "rejected" && (
-                  <p className="mt-4 rounded-control bg-surface px-3 py-2.5 text-[11.5px] leading-4 text-secondary">
+                  <p className="mt-4 glass-well rounded-control px-3 py-2.5 text-[11.5px] leading-4 text-secondary">
                     The donor chose another organization for this donation.
                   </p>
                 )}
 
                 {myRequest.status === "completed" && (
-                  <p className="mt-4 rounded-control bg-green-light px-3 py-2.5 text-[11.5px] leading-4 text-green-dark">
+                  <p className="mt-4 rounded-control bg-accent-soft px-3 py-2.5 text-[11.5px] leading-4 text-accent-strong">
                     This collection is complete and recorded in your
                     collections history.
                   </p>
                 )}
 
                 {myRequest.status === "cancelled" && (
-                  <p className="mt-4 rounded-control bg-surface px-3 py-2.5 text-[11.5px] leading-4 text-secondary">
+                  <p className="mt-4 glass-well rounded-control px-3 py-2.5 text-[11.5px] leading-4 text-secondary">
                     You cancelled this request. The donation may still be
                     available.
                   </p>
@@ -286,7 +286,7 @@ export default async function NgoDonationDetailPage({
                 </div>
               </div>
             ) : (
-              <p className="mt-3 rounded-control bg-surface px-3 py-2.5 text-[11.5px] leading-4 text-secondary">
+              <p className="mt-3 glass-well rounded-control px-3 py-2.5 text-[11.5px] leading-4 text-secondary">
                 This donation is no longer open for new requests.
               </p>
             )}
@@ -320,7 +320,7 @@ export default async function NgoDonationDetailPage({
                     className={cn(
                       "mt-0.5 block text-[11px]",
                       deadlineState === "soon"
-                        ? "font-medium text-green-dark"
+                        ? "font-medium text-accent-strong"
                         : "text-muted",
                     )}
                   >
@@ -333,7 +333,7 @@ export default async function NgoDonationDetailPage({
 
           <Card className="p-5">
             <h2 className="flex items-center gap-1.5 text-[15px] font-semibold text-ink">
-              <ShieldCheck className="size-4 text-green-text" strokeWidth={1.8} />
+              <ShieldCheck className="size-4 text-accent-ink" strokeWidth={1.8} />
               Food safety
             </h2>
             <div className="mt-2">
@@ -349,7 +349,7 @@ export default async function NgoDonationDetailPage({
               <DetailRow label="Food type">
                 <Badge
                   tone={
-                    donation.foodType === "vegetarian" ? "green" : "outline"
+                    donation.foodType === "vegetarian" ? "accent" : "outline"
                   }
                 >
                   {FOOD_TYPE_LABELS[donation.foodType]}

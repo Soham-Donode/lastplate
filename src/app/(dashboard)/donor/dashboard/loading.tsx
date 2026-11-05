@@ -18,7 +18,7 @@ export default function DashboardLoading() {
         {[0, 1, 2, 3].map((index) => (
           <div
             key={index}
-            className="h-[148px] animate-pulse rounded-card border border-line bg-paper p-5"
+            className="h-[148px] animate-pulse glass-surface rounded-card p-5"
           >
             <div className="h-4 w-28 rounded-xs bg-surface" />
             <div className="mt-8 h-9 w-16 rounded-xs bg-subtle" />
@@ -28,14 +28,14 @@ export default function DashboardLoading() {
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
-        <div className="h-[290px] animate-pulse rounded-card border border-line bg-paper lg:col-span-7 xl:col-span-5" />
-        <div className="h-[290px] animate-pulse rounded-card border border-line bg-paper lg:col-span-5 xl:col-span-3" />
-        <div className="h-[290px] animate-pulse rounded-card border border-line bg-paper lg:col-span-12 xl:col-span-4" />
+        <div className="h-[290px] animate-pulse rounded-card border border-line/60 bg-surface lg:col-span-7 xl:col-span-5" />
+        <div className="h-[290px] animate-pulse rounded-card border border-line/60 bg-surface lg:col-span-5 xl:col-span-3" />
+        <div className="h-[290px] animate-pulse rounded-card border border-line/60 bg-surface lg:col-span-12 xl:col-span-4" />
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
-        <div className="h-[330px] animate-pulse rounded-card border border-line bg-paper lg:col-span-7" />
-        <div className="h-[330px] animate-pulse rounded-card border border-line bg-paper lg:col-span-5" />
+        <div className="h-[330px] animate-pulse rounded-card border border-line/60 bg-surface lg:col-span-7" />
+        <div className="h-[330px] animate-pulse rounded-card border border-line/60 bg-surface lg:col-span-5" />
       </div>
     </div>
   );

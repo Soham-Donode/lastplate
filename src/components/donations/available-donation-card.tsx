@@ -48,7 +48,7 @@ export function AvailableDonationCard({
             </div>
           </div>
           <Badge
-            tone={donation.foodType === "vegetarian" ? "green" : "outline"}
+            tone={donation.foodType === "vegetarian" ? "accent" : "outline"}
             className="shrink-0"
           >
             {FOOD_TYPE_LABELS[donation.foodType]}
@@ -58,7 +58,7 @@ export function AvailableDonationCard({
         <h3 className="mt-3 text-[15px] font-semibold leading-5 text-ink">
           <Link
             href={`/ngo/donations/${donation.id}`}
-            className="transition-colors group-hover:text-green-dark"
+            className="transition-colors group-hover:text-accent-strong"
           >
             {donation.title}
           </Link>
@@ -80,7 +80,7 @@ export function AvailableDonationCard({
             <dd
               className={cn(
                 "mt-0.5 text-[12px] font-medium",
-                deadlineState === "soon" ? "text-green-dark" : "text-ink",
+                deadlineState === "soon" ? "text-accent-strong" : "text-ink",
               )}
             >
               {formatRelative(donation.pickupDeadline)}
@@ -97,7 +97,7 @@ export function AvailableDonationCard({
           </span>
           <Link
             href={`/ngo/donations/${donation.id}`}
-            className="inline-flex shrink-0 items-center gap-1 text-[11.5px] font-medium text-green-dark hover:underline"
+            className="inline-flex shrink-0 items-center gap-1 text-[11.5px] font-medium text-accent-strong hover:underline"
           >
             View
             <ArrowUpRight className="size-3.5" strokeWidth={1.8} />

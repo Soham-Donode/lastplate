@@ -50,7 +50,7 @@ export default async function DonorDashboardPage() {
               <Inbox className="size-4" strokeWidth={1.8} />
               Review requests
               {overview.pendingRequests > 0 && (
-                <span className="ml-0.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-green-light px-1.5 text-[10.5px] font-medium text-green-dark tabular">
+                <span className="ml-0.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-accent-soft px-1.5 text-[10.5px] font-medium text-accent-strong tabular">
                   {overview.pendingRequests}
                 </span>
               )}

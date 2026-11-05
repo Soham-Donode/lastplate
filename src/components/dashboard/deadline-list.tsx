@@ -43,7 +43,7 @@ export function DeadlineList({
           <li key={donation.id}>
             <Link
               href={`${hrefBase}/${donation.id}`}
-              className="group -mx-2 flex items-center gap-3 rounded-control px-2 py-3 transition-colors hover:bg-canvas"
+              className="group -mx-2 flex items-center gap-3 rounded-control px-2 py-3 transition-colors hover:bg-surface"
             >
               <span className="flex size-10 shrink-0 flex-col items-center justify-center rounded-control bg-surface">
                 <span className="tabular text-[14px] font-semibold leading-4 text-ink">
@@ -55,7 +55,7 @@ export function DeadlineList({
               </span>
 
               <span className="min-w-0 flex-1">
-                <span className="block truncate text-[13px] font-medium text-ink group-hover:text-green-dark">
+                <span className="block truncate text-[13px] font-medium text-ink group-hover:text-accent-strong">
                   {donation.title}
                 </span>
                 <span className="mt-0.5 flex items-center gap-1 text-[11px] text-muted">
@@ -72,7 +72,7 @@ export function DeadlineList({
               <span
                 className={cn(
                   "shrink-0 text-[10.5px] font-medium",
-                  state === "soon" ? "text-green-dark" : "text-muted",
+                  state === "soon" ? "text-accent-strong" : "text-muted",
                 )}
               >
                 {formatRelative(donation.pickupDeadline)}

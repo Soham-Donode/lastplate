@@ -30,11 +30,11 @@ export function NearbyDonationList({
           <li key={donation.id}>
             <Link
               href={`/ngo/donations/${donation.id}`}
-              className="group -mx-2 flex items-center gap-3 rounded-control px-2 py-3 transition-colors hover:bg-canvas"
+              className="group -mx-2 flex items-center gap-3 rounded-control px-2 py-3 transition-colors hover:bg-surface"
             >
               <CategoryIcon category={donation.category} />
               <span className="min-w-0 flex-1">
-                <span className="block truncate text-[13px] font-medium text-ink group-hover:text-green-dark">
+                <span className="block truncate text-[13px] font-medium text-ink group-hover:text-accent-strong">
                   {donation.title}
                 </span>
                 <span className="mt-0.5 block truncate text-[11px] text-muted">
@@ -50,7 +50,7 @@ export function NearbyDonationList({
                   className={cn(
                     "mt-0.5 block text-[10.5px]",
                     deadlineState === "soon"
-                      ? "font-medium text-green-dark"
+                      ? "font-medium text-accent-strong"
                       : "text-muted",
                   )}
                 >

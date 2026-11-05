@@ -45,7 +45,7 @@ export function DonationsTable({ donations }: { donations: Donation[] }) {
             {donations.map((donation) => (
               <tr
                 key={donation.id}
-                className="group transition-colors hover:bg-canvas/70"
+                className="group transition-colors hover:bg-surface"
               >
                 <td className="py-3 pr-4">
                   <Link
@@ -54,7 +54,7 @@ export function DonationsTable({ donations }: { donations: Donation[] }) {
                   >
                     <CategoryIcon category={donation.category} />
                     <span className="min-w-0">
-                      <span className="block truncate text-[13px] font-medium text-ink group-hover:text-green-dark">
+                      <span className="block truncate text-[13px] font-medium text-ink group-hover:text-accent-strong">
                         {donation.title}
                       </span>
                       <span className="mt-0.5 block text-[10.5px] text-muted">
@@ -99,7 +99,7 @@ export function DonationsTable({ donations }: { donations: Donation[] }) {
           <li key={donation.id}>
             <Link
               href={`/donor/donations/${donation.id}`}
-              className="-mx-2 block rounded-control px-2 py-3 transition-colors hover:bg-canvas"
+              className="-mx-2 block rounded-control px-2 py-3 transition-colors hover:bg-surface"
             >
               <span className="flex items-start justify-between gap-3">
                 <span className="min-w-0">

@@ -39,18 +39,24 @@ function NavLink({
         onClick={onNavigate}
         aria-current={active ? "page" : undefined}
         className={cn(
-          "group flex h-[38px] items-center gap-2.5 rounded-control px-2.5 text-[13.5px] transition-colors duration-150",
+          "group relative flex h-[38px] items-center gap-2.5 rounded-[11px] border px-2.5 text-[13px] transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]",
           active
-            ? "bg-green-light font-medium text-green-dark"
-            : "text-secondary hover:bg-surface hover:text-ink",
+            ? "border-accent/60 bg-accent-soft font-medium text-accent-ink"
+            : "border-transparent text-secondary hover:bg-surface hover:text-ink",
         )}
       >
+        {active && (
+          <span
+            aria-hidden="true"
+            className="absolute -left-px top-1/2 h-4 w-[2.5px] -translate-y-1/2 rounded-full bg-accent-ink"
+          />
+        )}
         <Icon
           aria-hidden="true"
           className={cn(
-            "size-[18px] shrink-0",
+            "size-[18px] shrink-0 transition-colors duration-200",
             active
-              ? "text-green-dark"
+              ? "text-accent-strong"
               : "text-muted group-hover:text-secondary",
           )}
           strokeWidth={1.8}
@@ -59,10 +65,10 @@ function NavLink({
         {showBadge && (
           <span
             className={cn(
-              "ml-auto inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1.5 text-[10.5px] font-medium tabular",
+              "ml-auto inline-flex h-5 min-w-5 items-center justify-center rounded-full border px-1.5 text-[10.5px] font-medium tabular",
               active
-                ? "bg-paper text-green-dark"
-                : "bg-surface text-secondary",
+                ? "border-accent/60 bg-paper text-accent-ink"
+                : "border-line bg-surface text-secondary",
             )}
           >
             {pendingRequests > 99 ? "99+" : pendingRequests}
@@ -95,8 +101,8 @@ export function Sidebar({
   ] as const;
 
   return (
-    <div className="flex h-full w-full flex-col bg-paper lg:w-[248px]">
-      <div className="flex h-[72px] shrink-0 items-center justify-between px-5">
+    <div className="flex h-full w-full flex-col lg:w-[264px]">
+      <div className="flex h-[76px] shrink-0 items-center justify-between px-5">
         <Logo href={navigation.home} onClick={onNavigate} />
         {onClose && (
           <Button
@@ -115,10 +121,10 @@ export function Sidebar({
         aria-label={navigation.label}
         className="scrollbar-none flex-1 overflow-y-auto px-3 pb-4"
       >
-        <p className="px-2 pb-2 text-[10px] font-medium uppercase tracking-[0.14em] text-muted">
+        <p className="px-2.5 pb-2 text-[9.5px] font-semibold uppercase tracking-[0.16em] text-muted/80">
           Menu
         </p>
-        <ul className="space-y-0.5">
+        <ul className="space-y-1">
           {navigation.main.map((item) => (
             <NavLink
               key={item.href}
@@ -130,10 +136,12 @@ export function Sidebar({
           ))}
         </ul>
 
-        <p className="mt-7 px-2 pb-2 text-[10px] font-medium uppercase tracking-[0.14em] text-muted">
+        <div className="mx-2.5 my-5 h-px bg-line" />
+
+        <p className="px-2.5 pb-2 text-[9.5px] font-semibold uppercase tracking-[0.16em] text-muted/80">
           General
         </p>
-        <ul className="space-y-0.5">
+        <ul className="space-y-1">
           {navigation.general.map((item) => (
             <NavLink
               key={item.href}
@@ -147,11 +155,11 @@ export function Sidebar({
             <form action={signOutAction}>
               <button
                 type="submit"
-                className="group flex h-[38px] w-full items-center gap-2.5 rounded-control px-2.5 text-[13.5px] text-secondary transition-colors duration-150 hover:bg-surface hover:text-ink"
+                className="group flex h-[38px] w-full items-center gap-2.5 rounded-[11px] border border-transparent px-2.5 text-[13px] text-secondary transition-all duration-200 hover:bg-surface hover:text-ink"
               >
                 <LogOut
                   aria-hidden="true"
-                  className="size-[18px] shrink-0 text-muted group-hover:text-secondary"
+                  className="size-[18px] shrink-0 text-muted transition-colors group-hover:text-secondary"
                   strokeWidth={1.8}
                 />
                 <span>Sign out</span>
@@ -162,11 +170,11 @@ export function Sidebar({
       </nav>
 
       <div className="shrink-0 px-3 pb-4">
-        <div className="rounded-card border border-line bg-canvas p-3">
+        <div className="glass-subtle glass-sheen rounded-[16px] p-3.5">
           <p className="flex items-center gap-1.5 text-[11.5px] font-medium text-ink">
             <ShieldCheck
               aria-hidden="true"
-              className="size-3.5 text-green-text"
+              className="size-3.5 text-accent-ink"
               strokeWidth={2}
             />
             Food safety first
@@ -174,11 +182,11 @@ export function Sidebar({
           <p className="mt-1.5 text-[11px] leading-4 text-muted">
             Only publish food you would be comfortable serving yourself.
           </p>
-          <p className="mt-2 truncate text-[10.5px] text-muted/80">
+          <p className="mt-2.5 truncate border-t border-line pt-2 text-[10.5px] text-muted">
             {profile.organizationName}
           </p>
           {demo && (
-            <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1">
+            <div className="mt-2 flex flex-wrap items-center gap-x-2.5 gap-y-1">
               {demoRoles
                 .filter((role) => role.value !== profile.role)
                 .map((role) => (
@@ -186,7 +194,7 @@ export function Sidebar({
                     key={role.value}
                     href={`/api/demo-role?role=${role.value}`}
                     onClick={onNavigate}
-                    className="text-[10.5px] font-medium text-green-dark underline-offset-2 hover:underline"
+                    className="text-[10.5px] font-medium text-accent-strong underline-offset-2 hover:underline"
                   >
                     {role.label} view
                   </Link>

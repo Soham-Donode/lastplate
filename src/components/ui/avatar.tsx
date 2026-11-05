@@ -14,7 +14,7 @@ export function Avatar({
 }: {
   name: string;
   size?: keyof typeof sizes;
-  tone?: "neutral" | "green";
+  tone?: "neutral" | "accent";
   className?: string;
 }) {
   return (
@@ -22,8 +22,8 @@ export function Avatar({
       aria-hidden="true"
       className={cn(
         "inline-flex shrink-0 items-center justify-center rounded-full border font-medium tracking-wide select-none",
-        tone === "green"
-          ? "border-green/15 bg-green-light text-green-dark"
+        tone === "accent"
+          ? "border-accent/70 bg-accent-soft text-accent-ink"
           : "border-line bg-surface text-secondary",
         sizes[size],
         className,

@@ -57,7 +57,7 @@ export default async function NgoDashboardPage() {
               <Inbox className="size-4" strokeWidth={1.8} />
               My requests
               {overview.pendingRequests > 0 && (
-                <span className="ml-0.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-green-light px-1.5 text-[10.5px] font-medium text-green-dark tabular">
+                <span className="ml-0.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-accent-soft px-1.5 text-[10.5px] font-medium text-accent-strong tabular">
                   {overview.pendingRequests}
                 </span>
               )}
@@ -70,7 +70,7 @@ export default async function NgoDashboardPage() {
         title="Donations near your kitchen"
         description={`Available pickups within 10 km of ${profile.organizationName}. Select a marker to open the donation.`}
         action={
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-green/20 bg-green-light px-2.5 py-1 text-[10.5px] font-medium text-green-dark">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/20 bg-accent-soft px-2.5 py-1 text-[10.5px] font-medium text-accent-strong">
             <MapPin className="size-3" strokeWidth={2} />
             10 km radius
           </span>
@@ -149,19 +149,19 @@ export default async function NgoDashboardPage() {
       </div>
 
       {overview.acceptedRequests > 0 && (
-        <div className="flex items-start gap-3 rounded-card border border-green/15 bg-green-light px-4 py-3">
+        <div className="flex items-start gap-3 rounded-card border border-accent/15 bg-accent-soft px-4 py-3">
           <CheckCheck
-            className="mt-0.5 size-4 shrink-0 text-green-dark"
+            className="mt-0.5 size-4 shrink-0 text-accent-strong"
             strokeWidth={1.8}
           />
-          <p className="text-[11.5px] leading-5 text-green-dark">
+          <p className="text-[11.5px] leading-5 text-accent-strong">
             You have {overview.acceptedRequests}{" "}
             {overview.acceptedRequests === 1 ? "pickup" : "pickups"} waiting.
             Confirm collection after your team has collected the food.
           </p>
           <Link
             href="/ngo/requests?status=accepted"
-            className="ml-auto hidden shrink-0 items-center gap-1 text-[11.5px] font-medium text-green-dark hover:underline sm:inline-flex"
+            className="ml-auto hidden shrink-0 items-center gap-1 text-[11.5px] font-medium text-accent-strong hover:underline sm:inline-flex"
           >
             <PackageCheck className="size-3.5" strokeWidth={1.8} />
             Review

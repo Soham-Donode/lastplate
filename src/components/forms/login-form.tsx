@@ -45,7 +45,7 @@ export function LoginForm({ initialError }: { initialError?: string }) {
           New to LastPlate?{" "}
           <Link
             href="/register"
-            className="font-medium text-green-text hover:underline"
+            className="font-medium text-accent-ink hover:underline"
           >
             Create an account
           </Link>
@@ -55,7 +55,7 @@ export function LoginForm({ initialError }: { initialError?: string }) {
       {serverError && (
         <div
           role="alert"
-          className="rounded-control border border-line bg-surface px-3 py-2.5 text-[12px] leading-5 text-ink-soft"
+          className="glass-well rounded-control px-3 py-2.5 text-[12px] leading-5 text-ink-soft"
         >
           {serverError}
         </div>

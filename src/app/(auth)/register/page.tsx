@@ -30,7 +30,7 @@ export default async function RegisterPage({
     <AuthShell>
       {isDemoMode ? (
         <div>
-          <span className="inline-flex size-10 items-center justify-center rounded-full bg-green-light text-green-dark">
+          <span className="inline-flex size-10 items-center justify-center rounded-full bg-accent-soft text-accent-strong">
             <Leaf className="size-5" strokeWidth={1.8} />
           </span>
           <h1 className="mt-4 text-[30px] font-semibold leading-[1.1] tracking-[-0.04em] text-ink sm:text-[34px]">
@@ -46,7 +46,7 @@ export default async function RegisterPage({
           </p>
           <p className="mt-3 flex items-start gap-1.5 text-[11px] leading-4 text-muted">
             <ShieldCheck
-              className="mt-0.5 size-3.5 shrink-0 text-green-text"
+              className="mt-0.5 size-3.5 shrink-0 text-accent-ink"
               strokeWidth={2}
             />
             NGO accounts are reviewed by an administrator before they can

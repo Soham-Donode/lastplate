@@ -29,7 +29,7 @@ export function RequestActions({ requestId }: { requestId: string }) {
 
   if (confirming) {
     return (
-      <div className="mt-3 rounded-control border border-line bg-canvas p-3">
+      <div className="mt-3 glass-well rounded-control p-3">
         <p className="text-[11.5px] leading-4 text-secondary">
           Accepting this request assigns the donation to this NGO and declines
           every other pending request for it.
