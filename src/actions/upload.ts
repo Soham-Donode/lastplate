@@ -1,19 +1,17 @@
 "use server";
 
 import { randomUUID } from "node:crypto";
-import { promises as fs } from "node:fs";
-import path from "node:path";
 import { requireDonor } from "@/lib/auth";
+import { DONATION_IMAGE_MAX_BYTES, DONATION_IMAGE_MAX_MB } from "@/lib/constants";
 import { isDemoMode } from "@/lib/data";
-import { demoUploadsDir } from "@/lib/demo/paths";
+import { saveDemoUpload } from "@/lib/demo/uploads";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
-const MAX_BYTES = 5 * 1024 * 1024;
-const EXTENSIONS: Record<string, string> = {
-  "image/jpeg": "jpg",
-  "image/png": "png",
-  "image/webp": "webp",
-};
+const EXTENSIONS = new Map([
+  ["image/jpeg", "jpg"],
+  ["image/png", "png"],
+  ["image/webp", "webp"],
+]);
 
 export type UploadResult =
   | { ok: true; url: string }
@@ -29,25 +27,20 @@ export async function uploadDonationImageAction(
     return { ok: false, message: "Choose an image to upload." };
   }
 
-  const extension = EXTENSIONS[file.type];
+  const extension = EXTENSIONS.get(file.type);
   if (!extension) {
     return { ok: false, message: "Use a JPG, PNG or WebP image." };
   }
 
-  if (file.size > MAX_BYTES) {
-    return { ok: false, message: "Images must be smaller than 5 MB." };
+  if (file.size > DONATION_IMAGE_MAX_BYTES) {
+    return { ok: false, message: `Images must be ${DONATION_IMAGE_MAX_MB} MB or smaller.` };
   }
 
   const filename = `${randomUUID()}.${extension}`;
 
   if (isDemoMode) {
     try {
-      const uploads = demoUploadsDir();
-      await fs.mkdir(uploads, { recursive: true });
-      await fs.writeFile(
-        path.join(uploads, filename),
-        Buffer.from(await file.arrayBuffer()),
-      );
+      await saveDemoUpload(filename, new Uint8Array(await file.arrayBuffer()));
       return { ok: true, url: `/api/demo-uploads/${filename}` };
     } catch {
       return { ok: false, message: "The image could not be saved." };

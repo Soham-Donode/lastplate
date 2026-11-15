@@ -3,9 +3,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* Apple-style system stack: SF Pro on Apple devices, Inter as the web fallback. */
+  /* Native system fonts keep the page independent of a font download. */
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
-    var(--font-inter), "Helvetica Neue", ui-sans-serif, system-ui, "Segoe UI",
+    "Helvetica Neue", ui-sans-serif, system-ui, "Segoe UI",
     sans-serif;
 
   --color-ink: #101a12;

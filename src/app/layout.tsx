@@ -1,15 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
 import "leaflet/dist/leaflet.css";
 import "./globals.css";
 import "./dark-theme.css";
 import { ThemeInitializer } from "@/components/ui/theme-initializer";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: {
@@ -32,7 +25,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} h-full antialiased`}
+      className="h-full antialiased"
     >
       <head>
         <ThemeInitializer />

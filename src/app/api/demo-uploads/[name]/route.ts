@@ -1,7 +1,6 @@
-import { readFile } from "node:fs/promises";
-import path from "node:path";
 import { NextResponse } from "next/server";
-import { demoUploadsDir } from "@/lib/demo/paths";
+import { readDemoUpload } from "@/lib/demo/uploads";
+import { isDemoMode } from "@/lib/supabase/config";
 
 const CONTENT_TYPES: Record<string, string> = {
   jpg: "image/jpeg",
@@ -16,7 +15,7 @@ export async function GET(
 ) {
   const { name } = await params;
 
-  if (!/^[a-f0-9-]+\.(jpg|jpeg|png|webp)$/i.test(name)) {
+  if (!isDemoMode || !/^[a-f0-9-]+\.(jpg|jpeg|png|webp)$/i.test(name)) {
     return new NextResponse("Not found", { status: 404 });
   }
 
@@ -28,7 +27,7 @@ export async function GET(
   }
 
   try {
-    const file = await readFile(path.join(demoUploadsDir(), name));
+    const file = await readDemoUpload(name);
 
     return new NextResponse(new Uint8Array(file), {
       headers: {

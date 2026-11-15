@@ -4,9 +4,8 @@ import { useRef, useState } from "react";
 import { ImagePlus, Loader2, UploadCloud, X } from "lucide-react";
 import { uploadDonationImageAction } from "@/actions/upload";
 import { Button } from "@/components/ui/button";
+import { DONATION_IMAGE_MAX_BYTES, DONATION_IMAGE_MAX_MB } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-
-const MAX_BYTES = 5 * 1024 * 1024;
 
 export function ImageUploader({
   value,
@@ -22,6 +21,8 @@ export function ImageUploader({
   const [error, setError] = useState<string | null>(null);
 
   async function handleFile(file: File) {
+    if (uploading) return;
+
     setError(null);
 
     if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
@@ -29,8 +30,8 @@ export function ImageUploader({
       return;
     }
 
-    if (file.size > MAX_BYTES) {
-      setError("Images must be smaller than 5 MB.");
+    if (file.size > DONATION_IMAGE_MAX_BYTES) {
+      setError(`Images must be ${DONATION_IMAGE_MAX_MB} MB or smaller.`);
       return;
     }
 
@@ -40,18 +41,24 @@ export function ImageUploader({
 
     const formData = new FormData();
     formData.append("file", file);
-    const result = await uploadDonationImageAction(formData);
-    setUploading(false);
-    URL.revokeObjectURL(localPreview);
+    try {
+      const result = await uploadDonationImageAction(formData);
 
-    if (!result.ok) {
+      if (!result.ok) {
+        setPreview(value);
+        setError(result.message);
+        return;
+      }
+
+      setPreview(result.url);
+      onChange(result.url);
+    } catch {
       setPreview(value);
-      setError(result.message);
-      return;
+      setError("The upload did not finish. Try again.");
+    } finally {
+      URL.revokeObjectURL(localPreview);
+      setUploading(false);
     }
-
-    setPreview(result.url);
-    onChange(result.url);
   }
 
   function remove() {
@@ -122,7 +129,7 @@ export function ImageUploader({
               Upload a photo
             </span>
             <span className="text-[11px] text-muted">
-              Drag and drop, or choose a file. JPG, PNG or WebP up to 5 MB.
+              Drag and drop, or choose a file. JPG, PNG or WebP up to {DONATION_IMAGE_MAX_MB} MB.
             </span>
           </button>
         )}

@@ -8,6 +8,8 @@ import type {
 } from "@/types";
 
 export const THEME_STORAGE_KEY = "lastplate-theme";
+export const DONATION_IMAGE_MAX_MB = 4;
+export const DONATION_IMAGE_MAX_BYTES = DONATION_IMAGE_MAX_MB * 1024 * 1024;
 
 export const FOOD_CATEGORIES: { value: FoodCategory; label: string }[] = [
   { value: "cooked_meals", label: "Cooked meals" },

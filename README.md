@@ -107,7 +107,7 @@ Open <http://localhost:3000>.
 
 ### Demo mode
 
-If `NEXT_PUBLIC_SUPABASE_URL` and a Supabase public key are empty, the app runs
+If the Supabase project URL or public key is missing, the app runs
 in a clearly labelled demo mode. It uses a local JSON workspace at
 `.data/demo-db.json` and `.data/uploads/` for images. No Supabase project is
 required to explore the donor, NGO, and admin dashboards.
@@ -134,16 +134,19 @@ demo; use Supabase for durable data.
 
 ### Deploying to Vercel
 
-`.env.local` is git-ignored and is **not** uploaded to Vercel. Configure the
-variables in **Project → Settings → Environment Variables** instead:
+Vercel loads settings from **Project → Settings → Environment Variables**.
+Set `NEXT_PUBLIC_SUPABASE_URL` and either `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+or the legacy `NEXT_PUBLIC_SUPABASE_ANON_KEY` for **Production**. Redeploy after
+changing the variables.
 
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY` (or `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`)
-- `SUPABASE_SERVICE_ROLE_KEY` (server-only, used by the seed script)
-- `DATABASE_URL` and `DIRECT_URL` (only needed for migrations/seed scripts)
+Apply the schema to the linked Supabase project before using it. The
+deployment only needs the project URL and public key. Keep
+`SUPABASE_SERVICE_ROLE_KEY`, `DATABASE_URL` and `DIRECT_URL` in the
+environment where you run migrations or the optional seed script.
 
-If the two public Supabase variables are missing, the deployment starts in demo
-mode and works without a database.
+A deployment without a complete pair opens the demo workspace. Demo uploads
+on Vercel use per-instance temporary storage. Live donation photos use
+Supabase Storage and each upload can be up to 4 MB.
 
 ### Supabase setup
 
@@ -285,11 +288,9 @@ supabase/migrations/          Canonical schema, RLS, RPCs, storage policies
 
 ## Design
 
-The interface uses black, white/grey, and a single light-blue accent
-(`#A6CEE3`, with deeper `#14556F` tones for text). It is mobile-first, uses
-Inter, and avoids gradients, glass effects, and decorative motion. Theme tokens
-live in `src/app/globals.css`; dark mode overrides the same tokens and is
-controlled by the theme toggle in the topbar, public header, and auth pages.
+The interface uses a sage accent, native system fonts, and responsive layouts.
+The shared theme tokens live in `src/app/globals.css`, with dark-mode colors in
+`src/app/dark-theme.css`.
 
 Maps use Leaflet with OpenStreetMap tiles, so no API key or paid mapping
 service is required. Tiles are muted with CSS to match the palette. Donation
