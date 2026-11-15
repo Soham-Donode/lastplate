@@ -1,9 +1,8 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
+import { THEME_STORAGE_KEY } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-
-const STORAGE_KEY = "lastplate-theme";
 
 export function ThemeToggle({ className }: { className?: string }) {
   function toggleTheme() {
@@ -11,7 +10,7 @@ export function ThemeToggle({ className }: { className?: string }) {
     document.documentElement.classList.toggle("dark", next);
 
     try {
-      localStorage.setItem(STORAGE_KEY, next ? "dark" : "light");
+      localStorage.setItem(THEME_STORAGE_KEY, next ? "dark" : "light");
     } catch {
       // Storage can be unavailable in private browsing; the toggle still works.
     }

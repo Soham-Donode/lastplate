@@ -64,9 +64,8 @@ export default async function NgoRequestsPage({
         }
       />
 
-      <div
-        className="scrollbar-none flex w-fit max-w-full items-center gap-1 overflow-x-auto rounded-control border border-line bg-surface p-1"
-        role="tablist"
+      <nav
+        className="flex w-fit max-w-full flex-wrap items-center gap-1 rounded-control border border-line bg-surface p-1"
         aria-label="Filter requests by status"
       >
         {FILTERS.map((item) => {
@@ -85,10 +84,9 @@ export default async function NgoRequestsPage({
                   ? "/ngo/requests"
                   : `/ngo/requests?status=${item.value}`
               }
-              role="tab"
-              aria-selected={active}
+              aria-current={active ? "page" : undefined}
               className={cn(
-                "inline-flex h-8 shrink-0 items-center gap-1.5 rounded-xs px-3 text-[12.5px] transition-colors",
+                "inline-flex h-10 shrink-0 items-center sm:h-8 gap-1.5 rounded-xs px-3 text-[12.5px] transition-colors",
                 active
                   ? "bg-accent-soft font-medium text-accent-strong"
                   : "text-secondary hover:bg-surface hover:text-ink",
@@ -106,7 +104,7 @@ export default async function NgoRequestsPage({
             </Link>
           );
         })}
-      </div>
+      </nav>
 
       {filtered.length === 0 ? (
         <Card className="p-5 sm:p-6">

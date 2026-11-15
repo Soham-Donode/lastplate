@@ -95,92 +95,88 @@ export default async function ExploreDonationsPage({
           action="/ngo/explore"
           method="get"
           role="search"
-          className="space-y-3"
+          className="grid gap-3 min-[360px]:grid-cols-2 md:grid-cols-6"
         >
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
-            <Field
-              label="Search food"
-              htmlFor="q"
-              className="min-w-0 flex-1"
-            >
-              <div className="relative">
-                <Search
-                  aria-hidden="true"
-                  className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted"
-                  strokeWidth={1.8}
-                />
-                <Input
-                  id="q"
-                  type="search"
-                  name="q"
-                  defaultValue={q}
-                  placeholder="Search by food title"
-                  className="pl-9"
-                />
-              </div>
-            </Field>
-
-            <Field label="Category" htmlFor="category" className="sm:w-44">
-              <Select id="category" name="category" defaultValue={category}>
-                <option value="all">All categories</option>
-                {FOOD_CATEGORIES.map((item) => (
-                  <option key={item.value} value={item.value}>
-                    {item.label}
-                  </option>
-                ))}
-              </Select>
-            </Field>
-
-            <Field label="Food type" htmlFor="foodType" className="sm:w-44">
-              <Select
-                id="foodType"
-                name="foodType"
-                defaultValue={foodType}
-              >
-                <option value="all">All food types</option>
-                <option value="vegetarian">
-                  {FOOD_TYPE_LABELS.vegetarian}
-                </option>
-                <option value="non_vegetarian">
-                  {FOOD_TYPE_LABELS.non_vegetarian}
-                </option>
-              </Select>
-            </Field>
-          </div>
-
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
-            <Field label="City" htmlFor="city" className="sm:w-48">
-              <Select id="city" name="city" defaultValue={city}>
-                <option value="all">All cities</option>
-                {cities.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </Select>
-            </Field>
-
-            <Field label="Sort by" htmlFor="sort" className="sm:w-48">
-              <Select id="sort" name="sort" defaultValue={sort}>
-                <option value="newest">Newest first</option>
-                <option value="deadline">Pickup deadline</option>
-              </Select>
-            </Field>
-
-            <div className="flex items-center gap-2 sm:ml-auto">
-              <button type="submit" className={buttonStyles()}>
-                <SlidersHorizontal className="size-4" strokeWidth={1.8} />
-                Apply filters
-              </button>
-              {hasFilters && (
-                <Link
-                  href="/ngo/explore"
-                  className={buttonStyles({ variant: "ghost" })}
-                >
-                  Clear
-                </Link>
-              )}
+          <Field
+            label="Search food"
+            htmlFor="q"
+            className="min-[360px]:col-span-2"
+          >
+            <div className="relative">
+              <Search
+                aria-hidden="true"
+                className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted"
+                strokeWidth={1.8}
+              />
+              <Input
+                id="q"
+                type="search"
+                name="q"
+                defaultValue={q}
+                placeholder="Search by food title"
+                className="pl-9"
+              />
             </div>
+          </Field>
+
+          <Field label="Category" htmlFor="category" className="md:col-span-2">
+            <Select id="category" name="category" defaultValue={category}>
+              <option value="all">All categories</option>
+              {FOOD_CATEGORIES.map((item) => (
+                <option key={item.value} value={item.value}>
+                  {item.label}
+                </option>
+              ))}
+            </Select>
+          </Field>
+
+          <Field label="Food type" htmlFor="foodType" className="md:col-span-2">
+            <Select
+              id="foodType"
+              name="foodType"
+              defaultValue={foodType}
+            >
+              <option value="all">All food types</option>
+              <option value="vegetarian">
+                {FOOD_TYPE_LABELS.vegetarian}
+              </option>
+              <option value="non_vegetarian">
+                {FOOD_TYPE_LABELS.non_vegetarian}
+              </option>
+            </Select>
+          </Field>
+
+          <Field label="City" htmlFor="city" className="md:col-span-2">
+            <Select id="city" name="city" defaultValue={city}>
+              <option value="all">All cities</option>
+              {cities.map((item) => (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              ))}
+            </Select>
+          </Field>
+
+          <Field label="Sort by" htmlFor="sort" className="md:col-span-2">
+            <Select id="sort" name="sort" defaultValue={sort}>
+              <option value="newest">Newest first</option>
+              <option value="deadline">Pickup deadline</option>
+            </Select>
+          </Field>
+
+          <div className="flex flex-wrap items-center gap-2 min-[360px]:col-span-2 md:self-end">
+            <button type="submit" className={buttonStyles({ className: "flex-1 md:flex-none" })}>
+              <SlidersHorizontal className="size-4" strokeWidth={1.8} />
+              Apply filters
+            </button>
+            {hasFilters && (
+              <Link
+                href="/ngo/explore"
+                className={buttonStyles({ variant: "ghost" })}
+              >
+                Clear
+              </Link>
+            )}
           </div>
         </form>
       </Card>

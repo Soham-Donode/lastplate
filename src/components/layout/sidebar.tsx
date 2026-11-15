@@ -39,9 +39,9 @@ function NavLink({
         onClick={onNavigate}
         aria-current={active ? "page" : undefined}
         className={cn(
-          "group relative flex h-[38px] items-center gap-2.5 rounded-[11px] border px-2.5 text-[13px] transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]",
+          "group relative flex h-11 items-center lg:h-[38px] gap-2.5 rounded-[11px] border px-2.5 text-[13px] transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)]",
           active
-            ? "border-accent/60 bg-accent-soft font-medium text-accent-ink"
+            ? "border-accent/60 bg-accent-soft font-medium text-accent-ink dark:border-accent/35"
             : "border-transparent text-secondary hover:bg-surface hover:text-ink",
         )}
       >
@@ -67,7 +67,7 @@ function NavLink({
             className={cn(
               "ml-auto inline-flex h-5 min-w-5 items-center justify-center rounded-full border px-1.5 text-[10.5px] font-medium tabular",
               active
-                ? "border-accent/60 bg-paper text-accent-ink"
+                ? "border-accent/60 bg-paper text-accent-ink dark:border-accent/35"
                 : "border-line bg-surface text-secondary",
             )}
           >
@@ -101,16 +101,16 @@ export function Sidebar({
   ] as const;
 
   return (
-    <div className="flex h-full w-full flex-col lg:w-[264px]">
-      <div className="flex h-[76px] shrink-0 items-center justify-between px-5">
+    <div className="flex h-full w-full flex-col max-lg:overflow-y-auto max-lg:overscroll-contain lg:w-[264px]">
+      <div className="flex h-16 shrink-0 items-center justify-between px-5 lg:h-[76px]">
         <Logo href={navigation.home} onClick={onNavigate} />
         {onClose && (
           <Button
             variant="ghost"
-            size="icon-sm"
+            size="icon"
             onClick={onClose}
             aria-label="Close navigation"
-            className="lg:hidden"
+            className="size-11 lg:hidden"
           >
             <X className="size-[18px]" strokeWidth={1.8} />
           </Button>
@@ -119,7 +119,7 @@ export function Sidebar({
 
       <nav
         aria-label={navigation.label}
-        className="scrollbar-none flex-1 overflow-y-auto px-3 pb-4"
+        className="min-h-0 shrink-0 px-3 pb-4 lg:scrollbar-none lg:flex-1 lg:overflow-y-auto"
       >
         <p className="px-2.5 pb-2 text-[9.5px] font-semibold uppercase tracking-[0.16em] text-muted/80">
           Menu
@@ -155,7 +155,7 @@ export function Sidebar({
             <form action={signOutAction}>
               <button
                 type="submit"
-                className="group flex h-[38px] w-full items-center gap-2.5 rounded-[11px] border border-transparent px-2.5 text-[13px] text-secondary transition-all duration-200 hover:bg-surface hover:text-ink"
+                className="group flex h-11 w-full items-center lg:h-[38px] gap-2.5 rounded-[11px] border border-transparent px-2.5 text-[13px] text-secondary transition-all duration-200 hover:bg-surface hover:text-ink"
               >
                 <LogOut
                   aria-hidden="true"
@@ -169,7 +169,7 @@ export function Sidebar({
         </ul>
       </nav>
 
-      <div className="shrink-0 px-3 pb-4">
+      <div className="shrink-0 px-3 pb-[max(1rem,env(safe-area-inset-bottom))]">
         <div className="glass-subtle glass-sheen rounded-[16px] p-3.5">
           <p className="flex items-center gap-1.5 text-[11.5px] font-medium text-ink">
             <ShieldCheck
@@ -194,7 +194,7 @@ export function Sidebar({
                     key={role.value}
                     href={`/api/demo-role?role=${role.value}`}
                     onClick={onNavigate}
-                    className="text-[10.5px] font-medium text-accent-strong underline-offset-2 hover:underline"
+                    className="inline-flex min-h-11 items-center text-xs font-medium text-accent-strong underline-offset-2 hover:underline lg:min-h-0 lg:text-[10.5px]"
                   >
                     {role.label} view
                   </Link>

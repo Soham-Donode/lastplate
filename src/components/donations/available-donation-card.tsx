@@ -9,7 +9,6 @@ import {
   cn,
   formatDateTime,
   formatQuantity,
-  formatRelative,
   getDeadlineState,
 } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -30,11 +29,13 @@ export function AvailableDonationCard({
         <img
           src={donation.imageUrl}
           alt={donation.title}
+          loading="lazy"
+          decoding="async"
           className="h-36 w-full object-cover"
         />
       )}
 
-      <div className="flex flex-1 flex-col p-5">
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
         <div className="flex items-start justify-between gap-3">
           <div className="flex min-w-0 items-center gap-2.5">
             <CategoryIcon category={donation.category} />
@@ -83,21 +84,21 @@ export function AvailableDonationCard({
                 deadlineState === "soon" ? "text-accent-strong" : "text-ink",
               )}
             >
-              {formatRelative(donation.pickupDeadline)}
+              {formatDateTime(donation.pickupDeadline)}
             </dd>
           </div>
         </dl>
 
-        <div className="mt-4 flex items-center justify-between gap-2">
+        <div className="mt-2 flex items-center justify-between gap-2">
           <span className="flex min-w-0 items-center gap-1 text-[10.5px] text-muted">
             <CalendarClock className="size-3 shrink-0" strokeWidth={1.8} />
-            <span className="truncate">
+            <span>
               Safe until {formatDateTime(donation.safeUntil)}
             </span>
           </span>
           <Link
             href={`/ngo/donations/${donation.id}`}
-            className="inline-flex shrink-0 items-center gap-1 text-[11.5px] font-medium text-accent-strong hover:underline"
+            className="inline-flex min-h-11 shrink-0 items-center gap-1 rounded-control px-2 text-xs font-medium text-accent-strong hover:underline"
           >
             View
             <ArrowUpRight className="size-3.5" strokeWidth={1.8} />

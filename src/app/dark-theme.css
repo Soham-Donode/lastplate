@@ -1,0 +1,35 @@
+html.dark {
+  --color-ink: #f0f3f6;
+  --color-ink-soft: #dde4eb;
+  --color-paper: #34373d;
+  --color-canvas: #27292d;
+  --color-surface: #3c4047;
+  --color-subtle: #464b53;
+  --color-line: #515862;
+  --color-line-strong: #8692a2;
+  --color-muted: #b6c0cc;
+  --color-secondary: #c5cfda;
+  --color-frame: #2d3035;
+
+  --color-accent: #a5dcb9;
+  --color-accent-soft: #284038;
+  --color-accent-ink: #a9e4be;
+  --color-accent-strong: #c6efd3;
+  --color-accent-solid: #a5dcb9;
+  --color-accent-solid-hover: #b9e8ca;
+  --color-on-accent: #122b20;
+
+  --shadow-pop: 0 12px 30px -12px rgb(0 0 0 / 0.55);
+  --glass-subtle: var(--color-surface);
+  --glass-surface: var(--color-paper);
+  --glass-strong: var(--color-surface);
+  --glass-window: var(--color-frame);
+  --glass-well: #2a2d33;
+  --glass-border: var(--color-line);
+  --glass-border-soft: var(--color-line);
+  --glass-hairline: var(--color-line);
+  --glass-shadow: none;
+  --glass-shadow-soft: none;
+  --glass-shadow-hover: 0 6px 18px -10px rgb(0 0 0 / 0.45);
+  --glass-window-shadow: none;
+}

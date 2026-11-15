@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "leaflet/dist/leaflet.css";
 import "./globals.css";
+import "./dark-theme.css";
 import { ThemeInitializer } from "@/components/ui/theme-initializer";
 
 const inter = Inter({
@@ -21,8 +22,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f5f7f9" },
-    { media: "(prefers-color-scheme: dark)", color: "#101317" },
+    { media: "(prefers-color-scheme: light)", color: "#f2f6ef" },
+    { media: "(prefers-color-scheme: dark)", color: "#27292d" },
   ],
 };
 
@@ -33,8 +34,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
       className={`${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full">
+      <head>
         <ThemeInitializer />
+      </head>
+      <body className="min-h-full">
         {children}
       </body>
     </html>

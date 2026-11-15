@@ -28,9 +28,15 @@ function SearchField({
         target instanceof HTMLSelectElement ||
         target?.isContentEditable;
 
-      if (event.key === "/" && !isTyping) {
+      const input = inputRef.current;
+      if (
+        event.key === "/" &&
+        !isTyping &&
+        input?.offsetWidth &&
+        !document.querySelector("dialog[open]")
+      ) {
         event.preventDefault();
-        inputRef.current?.focus();
+        input.focus();
       }
     }
 
@@ -69,11 +75,13 @@ export function Topbar({
   profile,
   pendingRequests,
   demo,
+  navOpen,
   onMenu,
 }: {
   profile: Profile;
   pendingRequests: number;
   demo: boolean;
+  navOpen: boolean;
   onMenu: () => void;
 }) {
   const navigation = navigationForRole(profile.role);
@@ -96,24 +104,26 @@ export function Topbar({
       : "/donor/settings";
 
   return (
-    <header className="sticky top-0 z-30 px-3 pt-3 sm:px-5 lg:px-6">
-      <div className="glass-surface glass-sheen flex h-[62px] items-center gap-2 rounded-[20px] px-3 sm:gap-3 sm:px-4">
+    <header className="sticky top-0 z-30 sm:px-5 sm:pt-3 lg:px-6">
+      <div className="glass-surface glass-sheen flex h-[62px] items-center gap-1 px-2 max-sm:rounded-none max-sm:border-x-0 max-sm:border-t-0 sm:gap-3 sm:rounded-[20px] sm:px-4">
         <Button
           variant="ghost"
           size="icon"
-          className="lg:hidden"
+          className="size-11 shrink-0 sm:size-10 lg:hidden"
           onClick={onMenu}
           aria-label="Open navigation"
+          aria-controls="dashboard-navigation"
+          aria-expanded={navOpen}
         >
           <Menu className="size-5" strokeWidth={1.8} />
         </Button>
 
         <Link
           href={navigation.home}
-          className="flex items-center gap-2 lg:hidden"
+          className="flex h-11 min-w-0 items-center gap-1.5 whitespace-nowrap sm:gap-2 lg:hidden"
           aria-label="LastPlate dashboard"
         >
-          <LogoMark className="size-[30px]" />
+          <LogoMark className="hidden size-[30px] shrink-0 min-[375px]:block" />
           <span className="text-[15px] font-semibold tracking-[-0.03em] text-ink">
             LastPlate
           </span>
@@ -126,7 +136,7 @@ export function Topbar({
           />
         </div>
 
-        <div className="ml-auto flex items-center gap-1.5 sm:gap-2">
+        <div className="ml-auto flex shrink-0 items-center gap-0.5 sm:gap-2">
           {demo && (
             <span
               title="This workspace uses local demo data. Add Supabase credentials to use your own database."
@@ -143,12 +153,12 @@ export function Topbar({
           <Link
             href={searchHref}
             aria-label="Search donations"
-            className="glass-well inline-flex size-10 items-center justify-center rounded-full text-secondary transition-[background-color,border-color,color,transform] duration-200 hover:-translate-y-px hover:text-ink sm:hidden"
+            className="glass-well inline-flex size-11 items-center justify-center rounded-full text-secondary transition-[background-color,border-color,color,transform] duration-200 hover:-translate-y-px hover:text-ink sm:hidden"
           >
             <Search className="size-[18px]" strokeWidth={1.8} />
           </Link>
 
-          <ThemeToggle />
+          <ThemeToggle className="size-11 sm:size-10" />
 
           <Link
             href={requestsHref}
@@ -161,7 +171,7 @@ export function Topbar({
                   ? "NGO verifications"
                   : "Collection requests"
             }
-            className="glass-well relative inline-flex size-10 items-center justify-center rounded-full text-secondary transition-[background-color,border-color,color,transform] duration-200 hover:-translate-y-px hover:text-ink"
+            className="glass-well relative inline-flex size-11 items-center justify-center rounded-full text-secondary sm:size-10 transition-[background-color,border-color,color,transform] duration-200 hover:-translate-y-px hover:text-ink"
           >
             <Bell className="size-[18px]" strokeWidth={1.8} />
             {pendingRequests > 0 && (
@@ -171,7 +181,8 @@ export function Topbar({
 
           <Link
             href={settingsHref}
-            className="ml-0.5 flex items-center gap-2.5 rounded-[14px] border border-transparent py-1 pl-1 pr-1 transition-all duration-200 hover:border-line hover:bg-surface md:pr-2.5"
+            aria-label="Organization settings"
+            className="flex h-11 min-w-11 items-center justify-center gap-2.5 rounded-[14px] border border-transparent px-1 transition-all duration-200 hover:border-line hover:bg-surface md:pr-2.5"
           >
             <Avatar name={profile.organizationName} tone="accent" />
             <span className="hidden text-left md:block">

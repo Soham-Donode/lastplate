@@ -40,7 +40,7 @@ function Section({
         <h2 className="text-[15px] font-semibold text-ink">{title}</h2>
         <p className="mt-1 text-[12px] leading-5 text-muted">{description}</p>
       </div>
-      <div className="grid gap-4 sm:grid-cols-2">{children}</div>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">{children}</div>
     </Card>
   );
 }
@@ -201,8 +201,8 @@ export function DonationForm({
                   key={option.value}
                   className={
                     foodType === option.value
-                      ? "flex h-10 cursor-pointer items-center justify-center rounded-control border border-accent-strong bg-accent-soft px-3 text-[13px] font-medium text-accent-strong has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-accent/25"
-                      : "flex h-10 cursor-pointer items-center justify-center rounded-control border border-line/70 bg-paper px-3 text-[13px] text-secondary transition-colors hover:bg-surface has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-accent/25"
+                      ? "flex min-h-11 cursor-pointer items-center justify-center text-center sm:min-h-10 rounded-control border border-accent-strong bg-accent-soft px-3 text-[13px] font-medium text-accent-strong has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-accent/25"
+                      : "flex min-h-11 cursor-pointer items-center justify-center text-center sm:min-h-10 rounded-control border border-line/70 bg-paper px-3 text-[13px] text-secondary transition-colors hover:bg-surface has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-accent/25"
                   }
                 >
                   <input
@@ -294,7 +294,7 @@ export function DonationForm({
           <label className="flex cursor-pointer items-start gap-3 glass-well rounded-control p-4 sm:col-span-2">
             <input
               type="checkbox"
-              className="mt-0.5 size-4 shrink-0 accent-[#2f7d9f]"
+              className="mt-0.5 size-4 shrink-0 accent-[#1f6132]"
               {...register("foodSafetyConfirmed")}
             />
             <span>

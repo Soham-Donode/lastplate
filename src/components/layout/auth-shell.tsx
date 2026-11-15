@@ -14,13 +14,12 @@ export function AuthShell({
   return (
     <main className="app-ambient relative min-h-dvh p-2.5 sm:p-4 lg:p-6">
       <div className="glass-window mx-auto flex min-h-[calc(100dvh-1.25rem)] w-full max-w-[1180px] overflow-hidden rounded-[24px] sm:min-h-[calc(100dvh-2rem)] sm:rounded-[28px] lg:min-h-[calc(100dvh-3rem)] lg:rounded-[32px]">
-        <aside className="relative hidden w-[44%] shrink-0 flex-col justify-between overflow-hidden border-r border-line bg-[#0d1418] p-8 lg:flex xl:p-10">
+        <aside className="relative hidden w-[44%] shrink-0 flex-col justify-between overflow-hidden border-r border-line bg-[#0c1710] p-8 lg:flex xl:p-10">
           <Image
             src="/auth-food.jpg"
             alt=""
             aria-hidden="true"
             fill
-            priority
             sizes="(min-width: 1024px) 44vw, 0px"
             className="scale-105 object-cover grayscale"
           />
@@ -77,25 +76,25 @@ export function AuthShell({
         </aside>
 
         <section className="relative flex min-w-0 flex-1 flex-col bg-paper">
-          <div className="flex items-center justify-between gap-3 px-5 pt-5 sm:px-8 sm:pt-7 lg:justify-end">
+          <div className="flex items-center justify-between gap-3 px-4 pt-4 sm:px-8 sm:pt-7 lg:justify-end">
             <Logo href="/" className="lg:hidden" />
             <div className="flex items-center gap-2">
               <Link
                 href="/"
-                className="glass-well inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11.5px] font-medium text-secondary transition-colors hover:text-ink lg:hidden"
+                className="glass-well inline-flex min-h-11 items-center gap-1.5 rounded-full px-3 text-xs font-medium text-secondary transition-colors hover:text-ink lg:hidden"
               >
                 <ArrowLeft className="size-3.5" strokeWidth={1.8} />
                 Back
               </Link>
-              <ThemeToggle />
+              <ThemeToggle className="size-11 lg:size-10" />
             </div>
           </div>
 
-          <div className="flex flex-1 items-center justify-center px-5 py-8 sm:px-8 lg:px-12 lg:py-10">
+          <div className="flex flex-1 items-start justify-center px-4 pb-8 pt-6 sm:px-8 sm:pt-8 lg:items-center lg:px-12 lg:py-10">
             <div className="w-full max-w-[420px]">{children}</div>
           </div>
 
-          <p className="mx-8 mb-5 border-t border-line pt-5 text-center text-[10.5px] leading-4 text-muted">
+          <p className="mx-4 mb-4 border-t border-line pt-4 text-center text-[10.5px] leading-4 text-muted sm:mx-8 sm:mb-5 sm:pt-5">
             {footer ?? (
               <>
                 <Link href="/" className="transition-colors hover:text-ink">

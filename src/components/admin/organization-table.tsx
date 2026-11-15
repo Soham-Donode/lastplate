@@ -21,8 +21,8 @@ function VerificationBadge({ status }: { status: VerificationStatus }) {
   }
 
   return (
-    <Badge tone="outline">
-      <StatusDot tone="dark" />
+    <Badge tone="warning">
+      <StatusDot tone="warning" />
       Pending
     </Badge>
   );
@@ -133,8 +133,8 @@ export function OrganizationTable({
   organizations: AdminOrganization[];
 }) {
   return (
-    <>
-      <div className="hidden lg:block">
+    <div className="@container">
+      <div className="hidden @min-[48rem]:block">
         <table className="w-full text-left">
           <thead>
             <tr className="border-b border-line">
@@ -198,7 +198,7 @@ export function OrganizationTable({
         </table>
       </div>
 
-      <ul className="divide-y divide-line lg:hidden">
+      <ul className="divide-y divide-line @min-[48rem]:hidden">
         {organizations.map((organization) => {
           const { profile } = organization;
 
@@ -233,6 +233,6 @@ export function OrganizationTable({
           );
         })}
       </ul>
-    </>
+    </div>
   );
 }

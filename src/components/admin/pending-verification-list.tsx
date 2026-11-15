@@ -28,7 +28,7 @@ export function PendingVerificationList({ ngos }: { ngos: Profile[] }) {
               <p className="truncate text-[13px] font-medium text-ink">
                 {ngo.organizationName}
               </p>
-              <Badge tone="outline">Pending</Badge>
+              <Badge tone="warning">Pending</Badge>
             </div>
             <p className="mt-0.5 text-[11.5px] text-muted">
               {ngo.organizationType} · {ngo.city}

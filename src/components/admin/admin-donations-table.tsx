@@ -10,8 +10,8 @@ export function AdminDonationsTable({
   donations: DonationWithDonor[];
 }) {
   return (
-    <>
-      <div className="hidden lg:block">
+    <div className="@container">
+      <div className="hidden @min-[43rem]:block">
         <table className="w-full text-left">
           <thead>
             <tr className="border-b border-line">
@@ -86,14 +86,14 @@ export function AdminDonationsTable({
         </table>
       </div>
 
-      <ul className="divide-y divide-line lg:hidden">
+      <ul className="divide-y divide-line @min-[43rem]:hidden">
         {donations.map((donation) => (
           <li key={donation.id} className="py-4">
             <div className="flex items-start justify-between gap-3">
               <div className="flex min-w-0 items-center gap-3">
                 <CategoryIcon category={donation.category} />
                 <span className="min-w-0">
-                  <span className="block truncate text-[13px] font-medium text-ink">
+                  <span className="block text-sm font-medium text-ink">
                     {donation.title}
                   </span>
                   <span className="mt-0.5 block text-[10.5px] text-muted">
@@ -133,6 +133,6 @@ export function AdminDonationsTable({
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 }

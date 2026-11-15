@@ -78,8 +78,6 @@ export function DonationMap({
   useEffect(() => {
     let cancelled = false;
     let map: Leaflet.Map | null = null;
-    let tileLayer: Leaflet.TileLayer | null = null;
-    let observer: MutationObserver | null = null;
 
     async function setup() {
       const L = await import("leaflet");
@@ -91,34 +89,19 @@ export function DonationMap({
         zoomControl: true,
       }).setView([centre.latitude, centre.longitude], 13);
 
-      const applyTiles = () => {
-        if (!map) return;
-        if (tileLayer) map.removeLayer(tileLayer);
-
-        tileLayer = L.tileLayer(
-          "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-          {
-            attribution:
-              '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-            subdomains: "abc",
-            maxZoom: 19,
-          },
-        ).addTo(map);
-      };
-
-      applyTiles();
-      observer = new MutationObserver(applyTiles);
-      observer.observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ["class"],
-      });
+      // Standard OpenStreetMap tiles: full colour, no API key required.
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19,
+      }).addTo(map);
 
       const circle = L.circle([centre.latitude, centre.longitude], {
         radius: radiusKm * 1000,
-        color: "#2f7d9f",
+        color: "#2e7d46",
         weight: 1.5,
         opacity: 0.9,
-        fillColor: "#a6cee3",
+        fillColor: "#9ed6a0",
         fillOpacity: 0.12,
         dashArray: "6 7",
         interactive: false,
@@ -128,7 +111,7 @@ export function DonationMap({
         radius: 5,
         color: "#ffffff",
         weight: 2,
-        fillColor: "#2f7d9f",
+        fillColor: "#2e7d46",
         fillOpacity: 1,
         interactive: false,
       })
@@ -194,10 +177,8 @@ export function DonationMap({
 
     return () => {
       cancelled = true;
-      observer?.disconnect();
       map?.remove();
       map = null;
-      tileLayer = null;
     };
   }, [donations, latitude, longitude, city, radiusKm, hrefBase, router]);
 

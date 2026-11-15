@@ -3,10 +3,10 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const controlBase =
-  "glass-well w-full rounded-control px-3 text-sm text-ink placeholder:text-muted transition-[border-color,box-shadow,background-color] duration-200 focus:border-accent-ink/60 focus:bg-paper focus:outline-none focus:ring-[3px] focus:ring-accent/40 disabled:cursor-not-allowed disabled:opacity-55";
+  "glass-well min-w-0 w-full rounded-control px-3 text-base sm:text-sm text-ink placeholder:text-muted transition-[border-color,box-shadow,background-color] duration-200 focus:border-accent-ink/60 focus:bg-paper focus:outline-none focus:ring-[3px] focus:ring-accent/40 disabled:cursor-not-allowed disabled:opacity-55";
 
 const largeField =
-  "h-12 rounded-[13px] px-4 text-[14px]";
+  "h-12 rounded-[13px] px-4";
 
 export function Input({
   className,
@@ -17,7 +17,7 @@ export function Input({
     <input
       className={cn(
         controlBase,
-        fieldSize === "lg" ? largeField : "h-10",
+        fieldSize === "lg" ? largeField : "h-11 sm:h-10",
         className,
       )}
       {...props}
@@ -35,7 +35,7 @@ export function Textarea({
       className={cn(
         controlBase,
         fieldSize === "lg"
-          ? "min-h-24 rounded-[13px] px-4 py-3 text-[14px] leading-6"
+          ? "min-h-24 rounded-[13px] px-4 py-3 leading-6"
           : "min-h-24 py-2.5 leading-6",
         className,
       )}
@@ -52,7 +52,7 @@ export function Select({
   return (
     <div className="relative">
       <select
-        className={cn(controlBase, "h-10 appearance-none pr-9", className)}
+        className={cn(controlBase, "h-11 appearance-none pr-9 sm:h-10", className)}
         {...props}
       >
         {children}
@@ -83,7 +83,7 @@ export function Field({
   className?: string;
 }) {
   return (
-    <div className={cn("space-y-1.5", className)}>
+    <div className={cn("min-w-0 space-y-1.5", className)}>
       <div className="flex items-baseline justify-between gap-3">
         <label
           htmlFor={htmlFor}

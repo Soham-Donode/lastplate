@@ -7,8 +7,8 @@ import { CategoryIcon, DonationStatusBadge } from "./status-badge";
 
 export function DonationsTable({ donations }: { donations: Donation[] }) {
   return (
-    <>
-      <div className="hidden md:block">
+    <div className="@container">
+      <div className="hidden @min-[35rem]:block">
         <table className="w-full text-left">
           <thead>
             <tr className="border-b border-line">
@@ -94,7 +94,7 @@ export function DonationsTable({ donations }: { donations: Donation[] }) {
         </table>
       </div>
 
-      <ul className="divide-y divide-line md:hidden">
+      <ul className="divide-y divide-line @min-[35rem]:hidden">
         {donations.map((donation) => (
           <li key={donation.id}>
             <Link
@@ -103,7 +103,7 @@ export function DonationsTable({ donations }: { donations: Donation[] }) {
             >
               <span className="flex items-start justify-between gap-3">
                 <span className="min-w-0">
-                  <span className="block truncate text-[13px] font-medium text-ink">
+                  <span className="block text-sm font-medium text-ink">
                     {donation.title}
                   </span>
                   <span className="mt-0.5 block text-[10.5px] text-muted">
@@ -115,19 +115,19 @@ export function DonationsTable({ donations }: { donations: Donation[] }) {
                   className="shrink-0"
                 />
               </span>
-              <span className="mt-2 flex items-center gap-2 text-[11.5px] text-muted">
+              <span className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted">
                 <span className="tabular text-secondary">
                   {formatQuantity(donation.quantity, donation.quantityUnit)}
                 </span>
                 <span aria-hidden="true" className="text-line-strong">
                   ·
                 </span>
-                <span>Pickup {formatRelative(donation.pickupDeadline)}</span>
+                <span>Pickup by {formatDateTime(donation.pickupDeadline)}</span>
               </span>
             </Link>
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 }

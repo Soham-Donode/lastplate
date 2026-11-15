@@ -13,15 +13,15 @@ import type {
   DonationStatus,
   FoodCategory,
 } from "@/types";
-import { Badge, StatusDot } from "@/components/ui/badge";
+import { Badge, StatusDot, type BadgeTone } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 const donationStatusConfig: Record<
   DonationStatus,
-  { label: string; tone: "accent" | "outline" | "neutral" | "dark"; dot: boolean }
+  { label: string; tone: BadgeTone; dot: boolean }
 > = {
   available: { label: "Available", tone: "accent", dot: true },
-  assigned: { label: "Assigned", tone: "outline", dot: true },
+  assigned: { label: "Assigned", tone: "info", dot: true },
   collected: { label: "Collected", tone: "neutral", dot: true },
   expired: { label: "Expired", tone: "neutral", dot: false },
   cancelled: { label: "Cancelled", tone: "neutral", dot: false },
@@ -47,7 +47,7 @@ export function DonationStatusBadge({
             status === "available" || status === "collected"
               ? "accent"
               : status === "assigned"
-                ? "dark"
+                ? "info"
                 : "neutral"
           }
         />
@@ -59,9 +59,9 @@ export function DonationStatusBadge({
 
 const requestStatusConfig: Record<
   CollectionRequestStatus,
-  { label: string; tone: "accent" | "outline" | "neutral"; dot: boolean }
+  { label: string; tone: BadgeTone; dot: boolean }
 > = {
-  pending: { label: "Pending", tone: "outline", dot: true },
+  pending: { label: "Pending", tone: "warning", dot: true },
   accepted: { label: "Accepted", tone: "accent", dot: true },
   rejected: { label: "Rejected", tone: "neutral", dot: false },
   cancelled: { label: "Cancelled", tone: "neutral", dot: false },
@@ -87,7 +87,7 @@ export function RequestStatusBadge({
     >
       {config.dot && (
         <StatusDot
-          tone={status === "pending" ? "dark" : "accent"}
+          tone={status === "pending" ? "warning" : "accent"}
         />
       )}
       {config.label}

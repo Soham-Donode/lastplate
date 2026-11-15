@@ -72,9 +72,8 @@ export default async function DonationsPage({
       />
 
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-        <div
-          className="scrollbar-none flex w-fit max-w-full items-center gap-1 overflow-x-auto rounded-control border border-line bg-surface p-1"
-          role="tablist"
+        <nav
+          className="flex w-fit max-w-full flex-wrap items-center gap-1 rounded-control border border-line bg-surface p-1"
           aria-label="Filter donations by status"
         >
           {DONATION_STATUS_FILTERS.map((filter) => {
@@ -84,10 +83,9 @@ export default async function DonationsPage({
               <Link
                 key={filter.value}
                 href={filterHref(filter.value)}
-                role="tab"
-                aria-selected={active}
+                aria-current={active ? "page" : undefined}
                 className={cn(
-                  "inline-flex h-8 shrink-0 items-center rounded-xs px-3 text-[12.5px] transition-colors",
+                  "inline-flex h-10 shrink-0 items-center sm:h-8 rounded-xs px-3 text-[12.5px] transition-colors",
                   active
                     ? "bg-accent-soft font-medium text-accent-strong"
                     : "text-secondary hover:bg-surface hover:text-ink",
@@ -97,7 +95,7 @@ export default async function DonationsPage({
               </Link>
             );
           })}
-        </div>
+        </nav>
 
         <form
           action="/donor/donations"
@@ -117,7 +115,7 @@ export default async function DonationsPage({
             defaultValue={query}
             placeholder="Search by food title"
             aria-label="Search donations by food title"
-            className="h-10 w-full rounded-control border border-line bg-paper pl-9 pr-10 text-[13px] text-ink placeholder:text-muted transition-colors focus:border-accent-ink focus:outline-none focus:ring-2 focus:ring-accent/40 [&::-webkit-search-cancel-button]:appearance-none"
+            className="h-11 w-full rounded-control border border-line bg-paper pl-9 pr-10 text-base sm:h-10 sm:text-[13px] text-ink placeholder:text-muted transition-colors focus:border-accent-ink focus:outline-none focus:ring-2 focus:ring-accent/40 [&::-webkit-search-cancel-button]:appearance-none"
           />
           <button
             type="submit"

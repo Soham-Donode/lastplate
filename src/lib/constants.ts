@@ -7,6 +7,8 @@ import type {
   UserRole,
 } from "@/types";
 
+export const THEME_STORAGE_KEY = "lastplate-theme";
+
 export const FOOD_CATEGORIES: { value: FoodCategory; label: string }[] = [
   { value: "cooked_meals", label: "Cooked meals" },
   { value: "rice_grains", label: "Rice & grains" },

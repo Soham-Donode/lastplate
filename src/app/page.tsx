@@ -2,19 +2,17 @@ import Link from "next/link";
 import {
   ArrowRight,
   BadgeCheck,
-  CalendarClock,
   CheckCircle2,
   HeartHandshake,
   Leaf,
-  MapPin,
   PackageCheck,
   ShieldCheck,
   UtensilsCrossed,
 } from "lucide-react";
 import { isDemoMode } from "@/lib/supabase/config";
 import { getPublicImpactStats } from "@/lib/data/public";
-import { Logo, LogoMark } from "@/components/ui/logo";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { LogoMark } from "@/components/ui/logo";
+import { LandingHeader } from "@/components/layout/landing-header";
 
 export const revalidate = 300;
 
@@ -22,37 +20,15 @@ const impactFormatter = new Intl.NumberFormat("en-IN");
 
 /* Flat (gradient-free) button treatments, scoped to the landing page. */
 const btnPrimary =
-  "inline-flex h-11 items-center justify-center gap-2 rounded-control bg-accent-solid px-5 text-sm font-semibold text-[#0d3446] shadow-[0_10px_24px_-16px_rgb(20_85_111/0.5)] transition duration-200 hover:bg-accent-solid-hover active:translate-y-px sm:h-11";
+  "inline-flex h-11 items-center justify-center gap-2 rounded-control bg-accent-solid px-5 text-sm font-semibold text-on-accent shadow-[0_10px_24px_-16px_rgb(31_97_50/0.5)] transition duration-200 hover:bg-accent-solid-hover active:translate-y-px dark:shadow-none";
 const btnOutline =
   "inline-flex h-11 items-center justify-center gap-2 rounded-control border border-line-strong bg-paper px-5 text-sm font-medium text-ink transition duration-200 hover:bg-surface active:translate-y-px";
-const btnPrimarySm =
-  "inline-flex h-9 items-center justify-center gap-1.5 rounded-control bg-accent-solid px-3.5 text-[13px] font-semibold text-[#0d3446] transition duration-200 hover:bg-accent-solid-hover";
 const btnWhite =
-  "inline-flex h-11 items-center justify-center gap-2 rounded-control bg-white px-5 text-sm font-medium text-[#14556f] transition duration-200 hover:bg-white/90 active:translate-y-px";
+  "inline-flex h-11 items-center justify-center gap-2 rounded-control bg-white px-5 text-sm font-medium text-[#1f6132] transition duration-200 hover:bg-white/90 active:translate-y-px dark:bg-accent-solid dark:text-on-accent dark:hover:bg-accent-solid-hover";
 const btnWhiteGhost =
-  "inline-flex h-11 items-center justify-center gap-2 rounded-control border border-[#0d3446]/30 px-5 text-sm font-medium text-[#0d3446] transition duration-200 hover:bg-[#0d3446]/10";
+  "inline-flex h-11 items-center justify-center gap-2 rounded-control border border-on-accent/35 px-5 text-sm font-medium text-on-accent transition duration-200 hover:bg-on-accent/10 dark:border-accent/55 dark:text-accent-strong dark:hover:bg-accent/10";
 
 const sectionWrap = "mx-auto max-w-6xl px-4 sm:px-6 lg:px-8";
-
-const navLinks = [
-  { href: "#how-it-works", label: "How it works" },
-  { href: "#who-its-for", label: "Who it's for" },
-  { href: "#impact", label: "Impact" },
-  { href: "#food-safety", label: "Food safety" },
-];
-
-/* The FSSAI-style vegetarian mark. */
-function VegMark({ className }: { className?: string }) {
-  return (
-    <span
-      aria-label="Vegetarian"
-      role="img"
-      className={`inline-flex size-4 shrink-0 items-center justify-center rounded-[3px] border-[1.5px] border-accent-strong ${className ?? ""}`}
-    >
-      <span className="size-1.5 rounded-full bg-accent-strong" />
-    </span>
-  );
-}
 
 export default async function HomePage() {
   const stats = await getPublicImpactStats();
@@ -64,94 +40,67 @@ export default async function HomePage() {
     <div className="min-h-dvh bg-canvas text-ink">
       {/* Announcement strip */}
       <div className="border-b border-accent/15 bg-accent-soft">
-        <p className="mx-auto max-w-6xl px-4 py-1.5 text-center text-[11px] font-medium tracking-[0.08em] text-accent-strong uppercase sm:px-6 lg:px-8">
+        <p className="mx-auto max-w-6xl px-4 py-1.5 text-center text-[10px] font-medium tracking-[0.04em] text-accent-strong uppercase sm:px-6 sm:text-[11px] sm:tracking-[0.08em] lg:px-8">
           Free for food donors · Free for verified NGOs
         </p>
       </div>
 
-      {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-line bg-canvas">
-        <div className={sectionWrap}>
-          <div className="flex h-16 items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <Logo href="/" />
-              {isDemoMode && (
-                <span className="hidden rounded-full border border-line bg-paper px-2.5 py-0.5 text-[11px] font-medium text-muted sm:inline-flex">
-                  Demo data
-                </span>
-              )}
-            </div>
+      <LandingHeader
+        demo={isDemoMode}
+        primaryHref={primaryHref}
+        secondaryHref={secondaryHref}
+      />
 
-            <nav
-              aria-label="Primary"
-              className="hidden items-center gap-6 text-[13px] font-medium text-muted md:flex"
-            >
-              {navLinks.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="transition-colors duration-200 hover:text-ink"
-                >
-                  {item.label}
-                </a>
-              ))}
-            </nav>
-
-            <div className="flex items-center gap-2">
-              <ThemeToggle className="size-9 rounded-control border border-line bg-paper text-secondary [background-image:none] hover:text-ink" />
-              {!isDemoMode && (
-                <Link
-                  href="/login"
-                  className="hidden h-9 items-center rounded-control px-3.5 text-[13px] font-medium text-secondary transition-colors duration-200 hover:bg-surface hover:text-ink sm:inline-flex"
-                >
-                  Sign in
-                </Link>
-              )}
-              <Link href={primaryHref} className={btnPrimarySm}>
-                {isDemoMode ? "Open demo" : "Donate food"}
-                <ArrowRight className="size-3.5" strokeWidth={2} />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <main>
+      <main className="[&>section[id]]:scroll-mt-16">
         {/* Hero */}
         <section className="relative overflow-hidden border-b border-line">
           <div className={sectionWrap}>
-            <div className="relative grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16 lg:py-24">
-              {/* Quiet flat geometry behind the mock card */}
+            <div className="relative grid gap-8 py-10 min-[400px]:gap-10 min-[400px]:py-12 sm:gap-12 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16 lg:py-24">
+              {/* Quiet flat geometry behind the photo */}
               <div
                 aria-hidden="true"
-                className="absolute top-8 right-6 hidden rounded-full border border-line lg:block"
-                style={{ width: 260, height: 260 }}
+                className="absolute -top-8 right-0 hidden rounded-full border border-dashed border-accent-ink/25 lg:block"
+                style={{ width: 300, height: 300 }}
               />
               <div
                 aria-hidden="true"
-                className="absolute right-40 bottom-16 hidden size-3 rounded-full bg-accent-ink lg:block"
+                className="absolute -bottom-8 left-1/2 hidden size-3 rounded-full bg-accent-ink lg:block"
               />
 
               <div>
-                <span className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent-soft px-3 py-1 text-[11.5px] font-medium text-accent-strong">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/20 bg-accent-soft px-2.5 py-1 text-[11px] font-medium text-accent-strong sm:gap-2 sm:px-3 sm:text-[11.5px]">
                   <Leaf className="size-3.5" strokeWidth={2} />
                   Surplus food, redirected to people who need it
                 </span>
 
-                <h1 className="mt-6 max-w-xl text-[44px] leading-[1.02] font-semibold tracking-[-0.045em] sm:text-[60px]">
+                <h1 className="mt-5 max-w-xl text-[clamp(2.25rem,9.2vw,3.25rem)] leading-[1.04] font-semibold tracking-[-0.045em] text-balance sm:mt-6 lg:text-[clamp(3rem,4.6vw,3.75rem)]">
                   Good food deserves a{" "}
-                  <span className="text-accent-ink underline decoration-accent/40 decoration-[3px] underline-offset-[10px]">
+                  <span className="relative inline-block text-accent-ink">
                     second chance.
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 200 10"
+                      preserveAspectRatio="none"
+                      className="absolute -bottom-2 left-0 h-[9px] w-full text-accent"
+                    >
+                      <path
+                        d="M2 7c16-4 32-4 48 0s32 4 48 0 32-4 48 0 32 4 52 1"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3.5"
+                        strokeLinecap="round"
+                      />
+                    </svg>
                   </span>
                 </h1>
 
-                <p className="mt-6 max-w-lg text-[15px] leading-8 text-secondary">
+                <p className="mt-5 max-w-lg text-[14px] leading-7 text-secondary sm:mt-6 sm:text-[15px] sm:leading-8">
                   LastPlate connects restaurants, hostels, messes, and
                   cafeterias with verified NGOs that can collect surplus food
                   and get it to people who need it — before it goes to waste.
                 </p>
 
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
                   <Link href={primaryHref} className={btnPrimary}>
                     {isDemoMode ? "Explore the demo" : "Donate surplus food"}
                     <ArrowRight className="size-4" strokeWidth={1.8} />
@@ -162,7 +111,7 @@ export default async function HomePage() {
                   </Link>
                 </div>
 
-                <div className="mt-8 grid max-w-lg gap-x-6 gap-y-2.5 text-[12.5px] text-muted sm:grid-cols-2">
+                <div className="mt-6 grid max-w-lg gap-x-6 gap-y-2 text-[12px] text-muted sm:mt-8 sm:grid-cols-2 sm:text-[12.5px]">
                   <span className="flex items-center gap-2">
                     <CheckCircle2
                       className="size-4 shrink-0 text-accent-ink"
@@ -180,93 +129,44 @@ export default async function HomePage() {
                 </div>
               </div>
 
-              {/* Product mockup: a listing plus an accepted request */}
+              {/* Hero photo: real rescue work, framed like everything else here */}
               <div className="relative">
-                <div className="relative rounded-panel border border-line bg-paper p-5 shadow-pop sm:p-6">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                      <span className="flex size-11 shrink-0 items-center justify-center rounded-control bg-accent-soft text-accent-strong">
-                        <UtensilsCrossed className="size-5" strokeWidth={1.8} />
-                      </span>
-                      <div className="min-w-0">
-                        <div className="flex min-w-0 items-center gap-2">
-                          <VegMark />
-                          <p className="truncate text-[14.5px] font-semibold">
-                            Rice, dal &amp; sabzi — evening service
-                          </p>
-                        </div>
-                        <p className="mt-0.5 text-[12px] text-muted">
-                          College Mess B · Pune
-                        </p>
-                      </div>
-                    </div>
-                    <span className="rounded-full border border-accent/20 bg-accent-soft px-2.5 py-1 text-[10.5px] font-semibold tracking-[0.06em] text-accent-strong uppercase">
-                      Available
-                    </span>
-                  </div>
+                {/* Offset frame echo behind the photo */}
+                <div
+                  aria-hidden="true"
+                  className="absolute -right-2.5 -bottom-2.5 hidden h-full w-full rounded-panel border-[1.5px] border-accent-ink/35 sm:block"
+                />
 
-                  <div className="mt-5 grid grid-cols-3 divide-x divide-line rounded-control border border-line bg-canvas py-3 text-center">
-                    <div>
-                      <p className="text-[17px] font-semibold tabular">45</p>
-                      <p className="mt-0.5 text-[10.5px] text-muted">
-                        servings
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-[17px] font-semibold tabular">19:30</p>
-                      <p className="mt-0.5 text-[10.5px] text-muted">
-                        safe until
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-[17px] font-semibold tabular">21:00</p>
-                      <p className="mt-0.5 text-[10.5px] text-muted">
-                        pickup by
-                      </p>
-                    </div>
-                  </div>
+                <figure className="relative m-0 overflow-hidden rounded-panel border border-line-strong bg-surface shadow-pop">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="https://akshayachaitanya.org/public/assets/images/akc-donate-bg-11.webp"
+                    alt="A child holding a plate of food"
+                    className="aspect-[4/3] max-h-[420px] w-full object-cover sm:aspect-[16/9] lg:aspect-[4/5] lg:max-h-[520px]"
+                  />
+                </figure>
 
-                  <dl className="mt-4 space-y-2.5 border-t border-line pt-4 text-[12px]">
-                    <div className="flex items-center gap-2 text-secondary">
-                      <MapPin
-                        className="size-3.5 shrink-0 text-muted"
-                        strokeWidth={1.8}
-                      />
-                      12 Shivaji Road, near main gate
-                    </div>
-                    <div className="flex items-center gap-2 text-secondary">
-                      <CalendarClock
-                        className="size-3.5 shrink-0 text-muted"
-                        strokeWidth={1.8}
-                      />
-                      Prepared today, 13:40
-                    </div>
-                  </dl>
+                {/* Rotated kitchen-ticket sticker */}
+                <div
+                  aria-hidden="true"
+                  className="absolute -top-3 right-3 z-10 rotate-[4deg] rounded-full border-[1.5px] border-dashed border-accent-ink/60 bg-accent-soft px-2.5 py-1 text-[9px] font-semibold tracking-[0.12em] text-accent-ink uppercase shadow-pop sm:right-8 sm:px-3.5 sm:py-1.5 sm:text-[10px] sm:tracking-[0.16em]"
+                >
+                  Fresh rescue · today
                 </div>
 
-                {/* Overlapping status card */}
-                <div className="relative z-10 -mt-5 ml-6 rounded-panel border border-line bg-frame p-4 text-white shadow-pop sm:ml-10">
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-2.5">
-                      <span className="flex size-9 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 text-[11px] font-semibold text-white">
-                        AK
-                      </span>
-                      <div>
-                        <p className="text-[12.5px] font-medium">
-                          Ananda Kitchens requested pickup
-                        </p>
-                        <p className="mt-0.5 text-[11px] text-white/60">
-                          Verified NGO · 2 collections this month
-                        </p>
-                      </div>
-                    </div>
-                    <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-white text-[#14556f]">
-                      <CheckCircle2 className="size-4" strokeWidth={2.2} />
-                    </span>
+                {/* Floating confirmation chip */}
+                <div className="absolute right-3 bottom-3 left-3 z-10 flex items-center gap-2.5 rounded-control border border-line-strong bg-paper px-3 py-2.5 shadow-pop sm:right-auto sm:bottom-5 sm:left-5 sm:gap-3 sm:px-4 sm:py-3">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent text-on-accent sm:size-9">
+                    <CheckCircle2 className="size-4 sm:size-[18px]" strokeWidth={2.2} />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-[11.5px] font-semibold text-ink sm:text-[12.5px]">
+                      Pickup confirmed — 45 servings
+                    </p>
+                    <p className="mt-0.5 text-[11px] leading-4 text-muted">
+                      Ananda Kitchens · collected before the safe-until deadline
+                    </p>
                   </div>
-                  <p className="mt-3 inline-flex items-center gap-1.5 rounded-control bg-white/10 px-2.5 py-1 text-[10.5px] font-medium tracking-[0.06em] text-white uppercase">
-                    Request accepted · Other requests closed
-                  </p>
                 </div>
               </div>
             </div>
@@ -276,12 +176,12 @@ export default async function HomePage() {
         {/* Why it matters */}
         <section className="border-b border-line">
           <div className={sectionWrap}>
-            <div className="grid gap-10 py-16 sm:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+            <div className="grid gap-8 py-12 sm:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
               <div>
                 <p className="text-[11px] font-semibold tracking-[0.14em] text-accent-strong uppercase">
                   Why it matters
                 </p>
-                <h2 className="mt-3 text-[30px] leading-[1.1] font-semibold tracking-[-0.04em] sm:text-[38px]">
+                <h2 className="mt-3 text-[26px] leading-[1.1] font-semibold tracking-[-0.04em] sm:text-[38px]">
                   Edible food is thrown away while neighbours go without a
                   meal.
                 </h2>
@@ -317,16 +217,16 @@ export default async function HomePage() {
         {/* How it works */}
         <section id="how-it-works" className="border-b border-line">
           <div className={sectionWrap}>
-            <div className="max-w-2xl pt-16 sm:pt-20">
+            <div className="max-w-2xl pt-12 sm:pt-20">
               <p className="text-[11px] font-semibold tracking-[0.14em] text-accent-strong uppercase">
                 How it works
               </p>
-              <h2 className="mt-3 text-[30px] font-semibold tracking-[-0.04em] sm:text-[38px]">
+              <h2 className="mt-3 text-[26px] font-semibold tracking-[-0.04em] sm:text-[38px]">
                 Two sides, one simple handoff.
               </h2>
             </div>
 
-            <div className="mt-12 grid gap-x-8 gap-y-10 pb-16 sm:pb-20 md:grid-cols-3">
+            <div className="mt-8 grid gap-x-8 gap-y-10 pb-12 sm:pb-20 md:grid-cols-3">
               {[
                 {
                   icon: UtensilsCrossed,
@@ -355,7 +255,7 @@ export default async function HomePage() {
                   className="border-t-2 border-line pt-6 lg:border-t lg:border-l-2 lg:pl-6"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="flex size-10 items-center justify-center rounded-control bg-accent text-[#0d3446]">
+                    <span className="flex size-10 items-center justify-center rounded-control bg-accent text-on-accent">
                       <step.icon className="size-5" strokeWidth={1.8} />
                     </span>
                     <span className="text-[26px] font-semibold tracking-[-0.04em] text-muted/50 tabular">
@@ -377,12 +277,12 @@ export default async function HomePage() {
         {/* Who it's for */}
         <section id="who-its-for" className="border-b border-line bg-paper">
           <div className={sectionWrap}>
-            <div className="grid gap-10 py-16 sm:py-20 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+            <div className="grid gap-8 py-12 sm:py-20 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
               <div>
                 <p className="text-[11px] font-semibold tracking-[0.14em] text-accent-strong uppercase">
                   Who can participate
                 </p>
-                <h2 className="mt-3 text-[30px] font-semibold tracking-[-0.04em] sm:text-[38px]">
+                <h2 className="mt-3 text-[26px] font-semibold tracking-[-0.04em] sm:text-[38px]">
                   Built for organizations that handle food at scale.
                 </h2>
                 <p className="mt-4 text-[13.5px] leading-7 text-muted">
@@ -455,26 +355,26 @@ export default async function HomePage() {
         </section>
 
         {/* Impact — solid dark band */}
-        <section id="impact" className="bg-frame">
+        <section id="impact" className="bg-frame dark:border-y dark:border-line">
           <div className={sectionWrap}>
-            <div className="py-16 sm:py-20">
+            <div className="py-12 sm:py-20">
               <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
                 <div className="max-w-xl">
                   <p className="text-[11px] font-semibold tracking-[0.14em] text-accent/80 uppercase">
                     Platform impact
                   </p>
-                  <h2 className="mt-3 text-[30px] leading-[1.1] font-semibold tracking-[-0.04em] text-white sm:text-[38px]">
+                  <h2 className="mt-3 text-[26px] leading-[1.1] font-semibold tracking-[-0.04em] text-white sm:text-[38px]">
                     Every completed pickup is a meal that stayed in the chain.
                   </h2>
                 </div>
-                <p className="max-w-xs text-[12px] leading-6 text-white/55">
+                <p className="max-w-xs text-[12px] leading-6 text-white/55 dark:text-muted">
                   Live totals from this LastPlate workspace. Numbers update as
                   donations and collections are recorded.
                 </p>
               </div>
 
               {hasImpact ? (
-                <div className="mt-10 grid grid-cols-2 overflow-hidden rounded-frame border border-white/10 lg:grid-cols-4">
+                <div className="mt-10 grid grid-cols-2 overflow-hidden rounded-frame border border-white/10 lg:grid-cols-4 dark:border-line dark:bg-paper">
                   {[
                     {
                       value: stats.collectionsCompleted,
@@ -496,7 +396,7 @@ export default async function HomePage() {
                     <div
                       key={stat.label}
                       className={[
-                        "border-white/10 p-6 sm:p-7",
+                        "border-white/10 p-4 sm:p-7 dark:border-line",
                         index % 2 === 1 ? "border-l" : "",
                         index >= 2 ? "border-t lg:border-t-0" : "",
                         index >= 2 ? "lg:border-l" : "",
@@ -504,25 +404,25 @@ export default async function HomePage() {
                         .filter(Boolean)
                         .join(" ")}
                     >
-                      <p className="text-[36px] font-semibold tracking-[-0.04em] text-white tabular sm:text-[40px]">
+                      <p className="text-[30px] font-semibold tracking-[-0.04em] text-white tabular sm:text-[40px]">
                         {impactFormatter.format(stat.value)}
                       </p>
-                      <p className="mt-2 text-[12px] text-white/55">
+                      <p className="mt-2 text-[12px] text-white/55 dark:text-muted">
                         {stat.label}
                       </p>
                     </div>
                   ))}
                 </div>
               ) : (
-                <div className="mt-10 rounded-frame border border-dashed border-white/20 px-6 py-12 text-center">
+                <div className="mt-10 rounded-frame border border-dashed border-white/20 px-6 py-12 text-center dark:border-line-strong dark:bg-paper">
                   <Leaf
-                    className="mx-auto size-6 text-white/60"
+                    className="mx-auto size-6 text-white/60 dark:text-accent-ink"
                     strokeWidth={1.8}
                   />
                   <p className="mt-4 text-[13.5px] font-medium text-white">
                     The first rescue is waiting to be shared.
                   </p>
-                  <p className="mx-auto mt-1.5 max-w-md text-[12px] leading-6 text-white/55">
+                  <p className="mx-auto mt-1.5 max-w-md text-[12px] leading-6 text-white/55 dark:text-muted">
                     Impact totals appear here as soon as donations and
                     collections are recorded in this workspace.
                   </p>
@@ -535,9 +435,9 @@ export default async function HomePage() {
         {/* Food safety */}
         <section id="food-safety" className="border-b border-line">
           <div className={sectionWrap}>
-            <div className="grid gap-8 py-16 sm:py-20 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-16">
+            <div className="grid gap-8 py-12 sm:py-20 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-16">
               <div className="flex items-start gap-4">
-                <span className="flex size-11 shrink-0 items-center justify-center rounded-control bg-accent text-[#0d3446]">
+                <span className="flex size-11 shrink-0 items-center justify-center rounded-control bg-accent text-on-accent">
                   <ShieldCheck className="size-5" strokeWidth={1.8} />
                 </span>
                 <div>
@@ -577,15 +477,15 @@ export default async function HomePage() {
         </section>
 
         {/* CTA */}
-        <section className="bg-accent-solid">
+        <section className="bg-accent-solid dark:bg-accent-soft">
           <div className={sectionWrap}>
-            <div className="flex flex-col items-start gap-8 py-16 sm:py-20 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex flex-col items-start gap-8 py-12 sm:py-20 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-2xl">
-                <h2 className="text-[30px] leading-[1.08] font-semibold tracking-[-0.04em] text-[#0d3446] sm:text-[40px]">
+                <h2 className="text-[26px] leading-[1.08] font-semibold tracking-[-0.04em] text-on-accent sm:text-[40px] dark:text-ink">
                   Have surplus food today? Let&apos;s put it on someone&apos;s
                   plate.
                 </h2>
-                <p className="mt-3.5 max-w-xl text-[14px] leading-7 text-[#0d3446]/80">
+                <p className="mt-3.5 max-w-xl text-[14px] leading-7 text-on-accent/80 dark:text-secondary">
                   Publish it in a couple of minutes. A verified NGO nearby can
                   request the pickup, and you stay in control of who collects —
                   with a full record of every rescue.

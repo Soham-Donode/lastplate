@@ -57,7 +57,7 @@ export default async function NgoDashboardPage() {
               <Inbox className="size-4" strokeWidth={1.8} />
               My requests
               {overview.pendingRequests > 0 && (
-                <span className="ml-0.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-accent-soft px-1.5 text-[10.5px] font-medium text-accent-strong tabular">
+                <span className="ml-0.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full border border-accent-ink/25 bg-accent-soft px-1.5 text-[10.5px] font-medium text-accent-strong tabular">
                   {overview.pendingRequests}
                 </span>
               )}
@@ -70,7 +70,7 @@ export default async function NgoDashboardPage() {
         title="Donations near your kitchen"
         description={`Available pickups within 10 km of ${profile.organizationName}. Select a marker to open the donation.`}
         action={
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/20 bg-accent-soft px-2.5 py-1 text-[10.5px] font-medium text-accent-strong">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-accent-ink/25 bg-accent-soft px-2.5 py-1 text-[10.5px] font-medium text-accent-strong">
             <MapPin className="size-3" strokeWidth={2} />
             10 km radius
           </span>
@@ -86,7 +86,7 @@ export default async function NgoDashboardPage() {
             city={profile.city}
             radiusKm={10}
             hrefBase="/ngo/donations"
-            className="h-[360px] w-full sm:h-[440px]"
+            className="h-[300px] w-full sm:h-[400px] lg:h-[440px]"
           />
         </div>
       </Panel>
@@ -149,7 +149,7 @@ export default async function NgoDashboardPage() {
       </div>
 
       {overview.acceptedRequests > 0 && (
-        <div className="flex items-start gap-3 rounded-card border border-accent/15 bg-accent-soft px-4 py-3">
+        <div className="flex items-start gap-3 rounded-card border border-accent-ink/20 bg-accent-soft px-4 py-3">
           <CheckCheck
             className="mt-0.5 size-4 shrink-0 text-accent-strong"
             strokeWidth={1.8}
