@@ -6,8 +6,7 @@ const initializeTheme = `
     try {
       stored = localStorage.getItem(${JSON.stringify(THEME_STORAGE_KEY)});
     } catch {}
-    const dark = stored === "dark" ||
-      (stored !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    const dark = stored === "dark";
     document.documentElement.classList.toggle("dark", dark);
   })();
 `;
